@@ -1,0 +1,11 @@
+.formInput
+{
+    max-width: 20vw;
+    background-image: linear-gradient(to right, white, rgb(190, 241, 250));
+    margin-bottom: 10px;
+    
+}
+
+.formLabel{
+    font-family: Georgia, 'Times New Roman', Times, serif
+}
