@@ -18,3 +18,17 @@
     display: inline-block;
     line-height: 1em;
   }
+
+  @media screen and (max-width: 480px) {
+    .myspan{
+        font-size: 50px !important;
+        margin-left:40px !important;
+    }
+    .txt-rotate{
+        font-size: 50px !important;
+    }
+
+    .register{
+        margin-left:100px !important;
+    }
+  }
