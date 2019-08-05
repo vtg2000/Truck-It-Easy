@@ -21,14 +21,14 @@
 
   @media screen and (max-width: 480px) {
     .myspan{
-        font-size: 50px !important;
+        font-size: 45px !important;
         margin-left:40px !important;
     }
     .txt-rotate{
-        font-size: 50px !important;
+        font-size: 45px !important;
     }
 
     .register{
-        margin-left:100px !important;
+        margin-left:90px !important;
     }
   }
