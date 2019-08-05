@@ -18,7 +18,7 @@
         <div  >
         <h2 style='margin-top: 100px; color: white ' class='text-center'>Login</h2>
         <form action="home.php" id="Myform" method='post' >
-            <div style = 'display:flex; color:white; flex-direction: column; margin-left: 40vw; background-image:linear-gradient( rgb(122, 113, 252), rgb(241, 11, 192)); margin-right:40vw; padding: 2vw; border-radius: 20px'>
+            <div style = 'display:flex; color:white; flex-direction: column; margin-left: 40vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:40vw; padding: 2vw; border-radius: 20px'>
             
             <label class = 'formLabel' for="">Email</label>
             <input required class = 'formInput' name="email">

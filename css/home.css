@@ -107,5 +107,5 @@
 }
   
   body{
-      background-image: linear-gradient(lightblue 30%, rgb(145, 145, 233));
+      background-image: linear-gradient(to right, lightblue 30%, rgb(145, 145, 233));
   }
