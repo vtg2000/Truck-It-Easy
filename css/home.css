@@ -1,0 +1,111 @@
+
+.sidenav {
+    margin-top: 60px;
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: rgb(16, 8, 54); /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #b1afaf;
+    display: block;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Style page content */
+  .main {
+      margin-top: 60px;
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  .navbar{
+      height: 60px;
+  }
+
+  #map {
+    /* border: 1px solid transparent; */
+      /* margin-left: 50px; */
+    /* margin-top: 135px; */
+    height: 80%;
+    width: 70%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+ 
+  .controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  #origin-input,
+  #destination-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 200px;
+  }
+
+  #origin-input:focus,
+  #destination-input:focus {
+    border-color: #4d90fe;
+  }
+
+  #mode-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    margin-left: 12px;
+    padding: 5px 11px 0px 11px;
+  }
+
+  #mode-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  .card-group{
+      margin-top: 20px;
+  }
+
+  .card{
+    /* background-image: linear-gradient(lightblue 30%,rgb(200, 49, 238)); */
+    margin-right: 30px;
+    border-radius: 10px;
+    max-width: 200px;
+    min-width: 200px;
+    margin-bottom: 15px !important;
+}
+  
+  body{
+      background-image: linear-gradient(lightblue 30%, rgb(145, 145, 233));
+  }
