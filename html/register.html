@@ -2,44 +2,63 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Job</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/register.css">
-    </head>
-    <body style='background-image: linear-gradient(to right, #780206,#061161); height: 100vh;'>
-        
-        <div  >
-        <h2 class='text-center' style='margin-top: 40px; color: white '>Register</h1>
-        <form action="register.php" id="Myform" method='post'>
-            <div style = 'display:flex; color:white; flex-direction: column; margin-left: 40vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:40vw; padding: 2vw; border-radius: 20px'>
-            <label class = 'formLabel' for="">Name</label>
-            <input required class = 'formInput' name='name' type="text">
-            <label class = 'formLabel' for="">Email</label>
-            <input required class = 'formInput' name='email' type="email">
-            <label class = 'formLabel' for="">Age</label>
-            <input required class = 'formInput' name='age' type="text">
-            <label class = 'formLabel' for="">Location</label>
-            <input required class = 'formInput' name='location' type="text">
-            <label class = 'formLabel' for="">Phone</label>
-            <input required class = 'formInput' name='phone' type="tel">
-            <label class = 'formLabel' for="">Password</label>
-            <input required class = 'formInput' name='password' type="password">
-            <br>
-            <button class = 'btn-success' type='submit'>Submit</button>
-            
-        </div>
-       
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 
-        </form>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Job</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+
+<body style='background-image: linear-gradient(to right, #780206,#061161); height: 100vh;'>
+    <nav class="navbar navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <div class='text-center'>Truck It Easy</div>
+        </a>
+        <div style='display:flex; flex-direction: row;'>
+            <a class="nav-item nav-link" href='login.php' style="color:white">Login</a>
+            <a class="nav-item nav-link" href="index.html" style="text-decoration:none; color:white;">Home</a>
+        </div>
+    </nav>
+    <div>
+        <h2 class='text-center' style='margin-top: 40px; color: white '>Register</h1>
+            <form action="register.php" id="Myform" method='post'>
+                <div
+                    style='display:flex; color:white; flex-direction: column; margin-left: 39vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:39vw; padding: 2vw; border-radius: 20px'>
+                    <label class='formLabel' for="">Name</label>
+                    <input required class='formInput' name='name' type="text">
+                    <label class='formLabel' for="">Email</label>
+                    <input required class='formInput' name='email' type="email">
+                    <label class='formLabel' for="">Age</label>
+                    <input required class='formInput' name='age' type="text">
+                    <label class='formLabel' for="">Location</label>
+                    <input required class='formInput' name='location' type="text">
+                    <label class='formLabel' for="">Phone</label>
+                    <input required class='formInput' name='phone' type="tel">
+                    <label class='formLabel' for="">Password</label>
+                    <input required class='formInput' name='password' type="password">
+                    <br>
+                    <div>
+                        <button class='btn-success' type='submit'
+                            style='width:100px; margin:auto; display:block'>Register</button>
+                    </div>
+                    <br>
+                    <p style='font-size:12px'>Have an account? <a href='login.php'>Login here</a></p>
+
+                </div>
+
+
+            </form>
     </div>
-        
-        
-    </body>
+
+
+</body>
+
 </html>

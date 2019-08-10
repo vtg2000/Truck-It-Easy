@@ -12,87 +12,100 @@
 </head>
 
 <body style='background-image: linear-gradient(to right, #780206,#061161); height: 100vh;'>
-        <nav class="navbar navbar-dark fixed-top">
-                <a class="navbar-brand" href="#" ><div class='text-center'>Truck It Easy</div></a>
-                <a class="nav-item nav-link" style="color:white"></a>
-                <a class="nav-item nav-link" onclick="logout()" href="login.php" style="text-decoration:none; color:white;">Logout</a>
-              </nav>
+    <nav class="navbar navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <div class='text-center'>Truck It Easy</div>
+        </a>
+        
+        <a class="nav-item nav-link" style="color:white">Welcome admin!</a>
+        <a class="nav-item nav-link" onclick="logout()" href="login.php"
+            style="text-decoration:none; color:white;">Logout</a>
+    </nav>
     <div>
         <div style='display: flex'>
-        <h2 style='margin-top: 100px; color: white; margin-left: 13vw; '>Add Goods</h2>
-        <h2 style='margin-top: 100px; color: white; margin-left: 15vw; '>Add a Truck</h2>
-        <h2 style='margin-top: 100px; color: white; margin-left: 13vw; '>Add a Service</h2>
+            <h2 style='margin-top: 80px; color: white; margin-left: 13vw; '>Add Goods</h2>
+            <h2 style='margin-top: 80px; color: white; margin-left: 20vw; '>Add a Truck</h2>
+            <h2 style='margin-top: 80px; color: white; margin-left: 18vw; '>Add a Service</h2>
 
         </div>
         <div style='display:flex'>
-        <form action="admin.php" id="Myform" method='post'>
-            <div
-                style='display:flex; color:white; flex-direction: column; margin-left:10vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:10vw; padding: 2vw; border-radius: 20px'>
-
-                <label class='formLabel' for="">Name</label>
-                <input required class='formInput' name="name">
-
-                <label class='formLabel' for="">Category</label>
-                <input required class='formInput' name="category">
-
-                <label class='formLabel' for="">Weight</label>
-                <input required class='formInput' name="weight">
-
-                <label class='formLabel' for="">Price factor</label>
-                <input required class='formInput' name="pricefactor">
-                <br>
-                <button class='btn-success' type='submit'>Submit</button>
-
-            </div>
-
-
-        </form>
-        <form action="admin.php" id="Myform1" method='post'>
-            <div
-                style='display:flex; color:white; flex-direction: column;  background-image:linear-gradient( #9D50BB, #6E48AA);  padding: 2vw; border-radius: 20px; margin-right:10vw'>
-
-                <label class='formLabel' for="">Name</label>
-                <input required class='formInput' name="tname">
-
-                <label class='formLabel' for="">Driver name</label>
-                <input required class='formInput' name="d_name">
-
-                <label class='formLabel' for="">Driver phone</label>
-                <input required class='formInput' name="d_number">
-
-                <label class='formLabel' for="">Capacity</label>
-                <input required class='formInput' name="tcapacity">
-
-                <label class='formLabel' for="">Price factor</label>
-                <input required class='formInput' name="tpricefactor">
-                <br>
-                <button class='btn-success' type='submit'>Submit</button>
-
-            </div>
-
-
-        </form>
-
-        <form action="admin.php" id="Myform1" method='post'>
+            <form action="admin.php" id="Myform" method='post'>
                 <div
-                    style='display:flex; color:white; flex-direction: column;  background-image:linear-gradient( #9D50BB, #6E48AA);  padding: 2vw; border-radius: 20px'>
-    
+                    style='display:flex; color:white; flex-direction: column; margin-left:10vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:15vw; padding: 2vw; border-radius: 20px'>
+
                     <label class='formLabel' for="">Name</label>
-                    <input required class='formInput' name="sname">
-    
-                    <label class='formLabel' for="">Contact</label>
-                    <input required class='formInput' name="scontact">
-    
-                    <label class='formLabel' for="">Rating</label>
-                    <input required class='formInput' name="rating">
+                    <input required class='formInput' name="name">
+
+                    <label class='formLabel' for="">Category</label>
+                    <input required class='formInput' name="category">
+
+                    <label class='formLabel' for="">Weight</label>
+                    <input required class='formInput' name="weight">
+
+                    <label class='formLabel' for="">Price factor</label>
+                    <input required class='formInput' name="pricefactor">
+                    
+                    <label class='formLabel' for="">Description</label>
+                    <textarea class='formInput' name="description"></textarea>
                     <br>
                     <button class='btn-success' type='submit'>Submit</button>
-    
+
                 </div>
-    
-    
-        </form>
-    </div>
+
+
+            </form>
+            <form action="admin.php" id="Myform1" method='post'>
+                <div
+                    style='display:flex; color:white; flex-direction: column;  background-image:linear-gradient( #9D50BB, #6E48AA);  padding: 2vw; border-radius: 20px; margin-right:15vw'>
+
+                    <label class='formLabel' for="">Name</label>
+                    <input required class='formInput' name="tname">
+
+                    <label class='formLabel' for="">Driver name</label>
+                    <input required class='formInput' name="d_name">
+
+                    <label class='formLabel' for="">Driver phone</label>
+                    <input required class='formInput' name="d_number">
+
+                    <label class='formLabel' for="">Capacity</label>
+                    <input required class='formInput' name="tcapacity">
+
+                    <label class='formLabel' for="">Price factor</label>
+                    <input required class='formInput' name="tpricefactor">
+
+                    <label class='formLabel' for="">Description</label>
+                    <textarea class='formInput' name="tdescription"></textarea>
+                    <br>
+                    <button class='btn-success' type='submit'>Submit</button>
+
+                </div>
+
+
+            </form>
+
+            <form action="admin.php" id="Myform1" method='post'>
+                <div
+                    style='display:flex; color:white; flex-direction: column;  background-image:linear-gradient( #9D50BB, #6E48AA);  padding: 2vw; border-radius: 20px'>
+
+                    <label class='formLabel' for="">Name</label>
+                    <input required class='formInput' name="sname">
+
+                    <label class='formLabel' for="">Contact</label>
+                    <input required class='formInput' name="scontact">
+
+                    <label class='formLabel' for="">Rating</label>
+                    <input required class='formInput' name="rating">
+
+                    <label class='formLabel' for="">Description</label>
+                    <textarea class='formInput' name="sdescription"></textarea>
+                    <br>
+                    <button class='btn-success' type='submit'>Submit</button>
+
+                </div>
+
+
+            </form>
+        </div>
     </div>
 </body>
 

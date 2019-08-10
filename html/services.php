@@ -4,12 +4,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/welcome.css">
+
   <title>Truck It Easy</title>
 </head>
 
 <body>
 
 <?php
+session_start();
 // db connection
 $servername = "localhost";
 $username = "postgres";
@@ -21,15 +24,15 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 ?>
 
 <!-- navbar -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-dark fixed-top">
     <a class="navbar-brand" href="home.php">Truck It Easy</a>
-    <!-- <a class="nav-item nav-link" style="color:white"><?php echo $user1[0];  ?></a> -->
+    <a class="nav-item nav-link" style="color:white"><?php echo $_SESSION['user1'][0];  ?></a>
     <a class="nav-item nav-link" onclick="logout()" href="login.php" style="text-decoration:none; color:white;">Logout</a>
   </nav>
 
   <!-- sidebar -->
   <div class="sidenav">
-    <a href="#">About</a>
+    <a href="home.php">Home</a>
     <a href="services.php">Services</a>
     <a href="#">My Orders</a>
     <a href="#">Contact Us</a>
@@ -46,7 +49,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
       if ($result) {
         
-          echo "<div class='card-group'>";
+          echo "<div class='card-group card-group-services animate-reveal animate-first'>";
 
           while($row = pg_fetch_row($result)) {
               echo "<div class='card'>

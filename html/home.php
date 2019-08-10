@@ -4,6 +4,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/welcome.css">
+
   <title>Truck It Easy</title>
 </head>
 
@@ -11,6 +13,8 @@
 
 
 <?php
+session_start();
+
 // db connection
 $servername = "localhost";
 $username = "postgres";
@@ -18,43 +22,20 @@ $password = "";
 $dbname = "postgres";
 $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username password=vtg@2000 connect_timeout=5");
 // login validation
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-$sql = 'SELECT * FROM "Users" WHERE "email" = $1 AND "password" = $2;';
-
-$result = pg_query_params($conn, $sql, array($email, $password));
-
-if (pg_num_rows($result) > 0 ) {
-  $user1 = pg_fetch_row($result);       
-} 
-else {
-    header("Location: http://localhost/Smart-Goods-System/html/login.php"); 
-    exit();
-}
-
-?>
-<?php if($user1[6] == 1):
-    {
-    header("Location: http://localhost/Smart-Goods-System/html/admin.html"); 
-    exit();
-  }
-    ?>
-<?php else: 
-
-
 
 ?>
   <!-- navbar -->
-  <nav class="navbar navbar-dark bg-primary fixed-top">
+  <?php if($_SESSION['user1']):
+  ?>
+  <nav class="navbar navbar-dark fixed-top">
     <a class="navbar-brand" href="#">Truck It Easy</a>
-    <a class="nav-item nav-link" style="color:white"><?php echo $user1[0];  ?></a>
+    <a class="nav-item nav-link" style="color:white"><?php echo $_SESSION["user1"][0];  ?></a>
     <a class="nav-item nav-link" onclick="logout()" href="login.php" style="text-decoration:none; color:white;">Logout</a>
   </nav>
 
   <!-- sidebar -->
   <div class="sidenav">
-    <a href="#">About</a>
+    <a href="home.php">Home</a>
     <a href="services.php">Services</a>
     <a href="#">My Orders</a>
     <a href="#">Contact Us</a>
@@ -63,8 +44,8 @@ else {
   <!-- main -->
   <div class="div main">
     <!-- location selector -->
-    <div id='location'>
-      <h4>Enter Starting location and Destination</h4>
+    <div id='location' class='animate-reveal animate-first'>
+      <h4 class='heading' style="color:white; margin-left:300px; margin-top:100px;">Enter Starting location and Destination</h4>
       
       <div style="display: none">
         <input id="origin-input" class="controls" required type="text" placeholder="Enter an origin location">
@@ -82,17 +63,17 @@ else {
           <label for="changemode-driving">Driving</label>
         </div>
       </div>
-      <div id="map"></div>
+      <div style='margin-left:100px' id="map"></div>
       
-      <a href="#goods">
+      
       <button class="btn-success" onclick='hideloc()' >Submit</button>
-      </a>
+      
     
     </div>
 
     <!-- goods selector -->
     <div id='goods' hidden=true>
-      <h4>Select the goods</h4>
+      <h4 class='heading' style="color:white">Select the goods</h4>
       <?php
       $sql = 'SELECT * FROM "Goods";';
 
@@ -126,7 +107,7 @@ else {
 
     <!-- truck selector -->
     <div id='truck' hidden=true>
-      <h4>Select the Truck</h4>
+      <h4 class='heading' style="color:white">Select the Truck</h4>
       <?php
       $sql = 'SELECT * FROM "Trucks";';
 
@@ -163,6 +144,10 @@ else {
 
   <!-- end of main -->
   </div>
+    <?php else:
+      header("Location: http://localhost/Smart-Goods-System/html/login.php"); 
+      exit(); ?>
+    <?php endif; ?>
 
   <script src="../js/maps.js"></script>
   <script src="../js/home.js"></script>
@@ -172,11 +157,10 @@ else {
     
     function logout(){
       console.log('hello');
-      document.cookie = "email=null";
+      
     }</script>
 
    
 </body>
 
 </html>
-<?php endif; ?>
