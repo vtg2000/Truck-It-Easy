@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/welcome.css">
 </head>
 
 <body style='background-image: linear-gradient(to right, #780206,#061161); height: 100vh;'>
     <nav class="navbar navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.html">
             <div class='text-center'>Truck It Easy</div>
         </a>
         <div style='display:flex; flex-direction: row;'>
@@ -27,11 +28,11 @@
             <a class="nav-item nav-link" href="index.html" style="text-decoration:none; color:white;">Home</a>
         </div>
     </nav>
-    <div>
-        <h2 class='text-center' style='margin-top: 40px; color: white '>Register</h1>
+    <div class='animate-reveal animate-first'>
+        <h2 class='text-center' style='margin-top: 20px; color: white '>Register</h1>
             <form action="register.php" id="Myform" method='post'>
                 <div
-                    style='display:flex; color:white; flex-direction: column; margin-left: 39vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:39vw; padding: 2vw; border-radius: 20px'>
+                    style='display:flex; color:white; flex-direction: column; margin-left: 39vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:39vw; padding-top: 1.7vw;padding-left: 1.7vw;padding-right: 1.7vw; border-radius: 20px'>
                     <label class='formLabel' for="">Name</label>
                     <input required class='formInput' name='name' type="text">
                     <label class='formLabel' for="">Email</label>
