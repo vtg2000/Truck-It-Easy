@@ -1,8 +1,5 @@
 <html>
-<?php
-   ob_start();
-   session_start();
-?>
+
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,14 +11,13 @@
 
 
 <?php
+// db connection
 $servername = "localhost";
 $username = "postgres";
 $password = "";
 $dbname = "postgres";
 $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username password=vtg@2000 connect_timeout=5");
-
-
-
+// login validation
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -30,39 +26,48 @@ $sql = 'SELECT * FROM "Users" WHERE "email" = $1 AND "password" = $2;';
 $result = pg_query_params($conn, $sql, array($email, $password));
 
 if (pg_num_rows($result) > 0 ) {
-
-  $_SESSION['valid'] = true;
-  $user1 = pg_fetch_row($result);
-         
-} else {
+  $user1 = pg_fetch_row($result);       
+} 
+else {
     header("Location: http://localhost/Smart-Goods-System/html/login.php"); 
     exit();
 }
 
 ?>
+<?php if($user1[6] == 1):
+    {
+    header("Location: http://localhost/Smart-Goods-System/html/admin.html"); 
+    exit();
+  }
+    ?>
+<?php else: 
 
+
+
+?>
+  <!-- navbar -->
   <nav class="navbar navbar-dark bg-primary fixed-top">
     <a class="navbar-brand" href="#">Truck It Easy</a>
-
     <a class="nav-item nav-link" style="color:white"><?php echo $user1[0];  ?></a>
     <a class="nav-item nav-link" onclick="logout()" href="login.php" style="text-decoration:none; color:white;">Logout</a>
-
-
   </nav>
 
+  <!-- sidebar -->
   <div class="sidenav">
     <a href="#">About</a>
-    <a href="#">Services</a>
+    <a href="services.php">Services</a>
     <a href="#">My Orders</a>
     <a href="#">Contact Us</a>
   </div>
 
+  <!-- main -->
   <div class="div main">
-
+    <!-- location selector -->
     <div id='location'>
       <h4>Enter Starting location and Destination</h4>
+      
       <div style="display: none">
-        <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location">
+        <input id="origin-input" class="controls" required type="text" placeholder="Enter an origin location">
 
         <input id="destination-input" class="controls" type="text" placeholder="Enter a destination location">
 
@@ -77,15 +82,19 @@ if (pg_num_rows($result) > 0 ) {
           <label for="changemode-driving">Driving</label>
         </div>
       </div>
-
       <div id="map"></div>
-      <button class="btn-success" onclick='hideloc()'>Submit</button>
+      
+      <a href="#goods">
+      <button class="btn-success" onclick='hideloc()' >Submit</button>
+      </a>
+    
     </div>
 
+    <!-- goods selector -->
     <div id='goods' hidden=true>
       <h4>Select the goods</h4>
       <?php
-      $sql = 'SELECT name, age, email FROM "Users";';
+      $sql = 'SELECT * FROM "Goods";';
 
       $result = pg_query($conn, $sql);
 
@@ -95,11 +104,13 @@ if (pg_num_rows($result) > 0 ) {
 
           while($row = pg_fetch_row($result)) {
               echo "<div class='card'>
-                <img class='card-img-top' src='...' alt='Card image cap'>
+                <img class='card-img-top' src='' alt='Card image cap'>
                 <div class='card-body'>
-                  <h5 class='card-title'>$row[0]</h5>
-                  <p class='card-text'>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 class='card-title'>$row[1]</h5>
+                  <p class='card-text'>$row[7]</p>
+                  <p>Weight : $row[3] Kgs</p>
                   <p class='card-text'><small class='text-muted'>$row[2]</small></p>
+                  <input type='checkbox'>
                 </div>
                 </div>
               ";
@@ -108,9 +119,48 @@ if (pg_num_rows($result) > 0 ) {
       } else {
           echo "0 results";
       }
+      
       ?>
+      <button class="btn-success" onclick='hidegoods()'>Submit</button>
     </div>
-  
+
+    <!-- truck selector -->
+    <div id='truck' hidden=true>
+      <h4>Select the Truck</h4>
+      <?php
+      $sql = 'SELECT * FROM "Trucks";';
+
+      $result = pg_query($conn, $sql);
+
+      if ($result) {
+        
+          echo "<div class='card-group'>";
+
+          while($row = pg_fetch_row($result)) {
+              echo "<div class='card'>
+                <img class='card-img-top' src='' alt='Card image cap'>
+                <div class='card-body'>
+                  <h5 class='card-title'>$row[1]</h5>
+                  <p class='card-text'>$row[7]</p>
+                  <p>Capacity : $row[2] Kgs</p>
+                  <p class='card-text'><small class='text-muted'>Driver : $row[3]</small></p>
+                  <p class='card-text'><small class='text-muted'>Contact : $row[4]</small></p>
+                  <input type='checkbox'>
+                </div>
+                </div>
+              ";
+          }
+          echo "</div>";
+      } else {
+          echo "0 results";
+      }
+      
+      ?>
+      <button class="btn-success">Submit</button>
+    </div>
+    <!-- amount, confirm booking -->
+    <!-- billing -->
+
   <!-- end of main -->
   </div>
 
@@ -125,12 +175,8 @@ if (pg_num_rows($result) > 0 ) {
       document.cookie = "email=null";
     }</script>
 
-  <?php 
-   $email =  $_COOKIE['email'];
-
-   
-?>
    
 </body>
 
 </html>
+<?php endif; ?>

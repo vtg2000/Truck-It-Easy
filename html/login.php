@@ -1,7 +1,4 @@
-<?php
-   session_start();
-   unset($_SESSION["valid"]);
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/register.css">
+    <title>Truck It Easy</title>
+</head>
+
+<body style='background-image: linear-gradient(to right, #780206,#061161); height: 100vh;'>
+        <nav class="navbar navbar-dark fixed-top">
+                <a class="navbar-brand" href="#" ><div class='text-center'>Truck It Easy</div></a>
+                <a class="nav-item nav-link" style="color:white"></a>
+                <a class="nav-item nav-link" onclick="logout()" href="login.php" style="text-decoration:none; color:white;">Logout</a>
+              </nav>
+    <div>
+        <div style='display: flex'>
+        <h2 style='margin-top: 100px; color: white; margin-left: 13vw; '>Add Goods</h2>
+        <h2 style='margin-top: 100px; color: white; margin-left: 15vw; '>Add a Truck</h2>
+        <h2 style='margin-top: 100px; color: white; margin-left: 13vw; '>Add a Service</h2>
+
+        </div>
+        <div style='display:flex'>
+        <form action="admin.php" id="Myform" method='post'>
+            <div
+                style='display:flex; color:white; flex-direction: column; margin-left:10vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:10vw; padding: 2vw; border-radius: 20px'>
+
+                <label class='formLabel' for="">Name</label>
+                <input required class='formInput' name="name">
+
+                <label class='formLabel' for="">Category</label>
+                <input required class='formInput' name="category">
+
+                <label class='formLabel' for="">Weight</label>
+                <input required class='formInput' name="weight">
+
+                <label class='formLabel' for="">Price factor</label>
+                <input required class='formInput' name="pricefactor">
+                <br>
+                <button class='btn-success' type='submit'>Submit</button>
+
+            </div>
+
+
+        </form>
+        <form action="admin.php" id="Myform1" method='post'>
+            <div
+                style='display:flex; color:white; flex-direction: column;  background-image:linear-gradient( #9D50BB, #6E48AA);  padding: 2vw; border-radius: 20px; margin-right:10vw'>
+
+                <label class='formLabel' for="">Name</label>
+                <input required class='formInput' name="tname">
+
+                <label class='formLabel' for="">Driver name</label>
+                <input required class='formInput' name="d_name">
+
+                <label class='formLabel' for="">Driver phone</label>
+                <input required class='formInput' name="d_number">
+
+                <label class='formLabel' for="">Capacity</label>
+                <input required class='formInput' name="tcapacity">
+
+                <label class='formLabel' for="">Price factor</label>
+                <input required class='formInput' name="tpricefactor">
+                <br>
+                <button class='btn-success' type='submit'>Submit</button>
+
+            </div>
+
+
+        </form>
+
+        <form action="admin.php" id="Myform1" method='post'>
+                <div
+                    style='display:flex; color:white; flex-direction: column;  background-image:linear-gradient( #9D50BB, #6E48AA);  padding: 2vw; border-radius: 20px'>
+    
+                    <label class='formLabel' for="">Name</label>
+                    <input required class='formInput' name="sname">
+    
+                    <label class='formLabel' for="">Contact</label>
+                    <input required class='formInput' name="scontact">
+    
+                    <label class='formLabel' for="">Rating</label>
+                    <input required class='formInput' name="rating">
+                    <br>
+                    <button class='btn-success' type='submit'>Submit</button>
+    
+                </div>
+    
+    
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>
