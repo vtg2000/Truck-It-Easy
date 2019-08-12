@@ -26,7 +26,7 @@ $result = pg_insert($conn, 'Users', $sql);
 
 if($result){
     echo "Records added successfully.<br>";
-    header("Location: http://localhost/Smart-Goods-System/html/login.php?success"); 
+    header("Location: http://localhost/Smart-Goods-System/html/auth/login.php?success"); 
     exit();
 } else{
     // echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);

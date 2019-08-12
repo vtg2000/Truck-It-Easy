@@ -1,17 +1,9 @@
-function hideloc() {
+function start_booking() {
   // console.log('i ran')
 
-  document.getElementById('location').hidden = true;
-  document.getElementById('goods').hidden = false;
-  document.getElementById('goods').className = "animate-reveal animate-first";
+  document.getElementById('start').hidden = true;
+  document.getElementById('location').hidden = false;
+  document.getElementById('location').className = "animate-reveal animate-first";
 
 }
 
-function hidegoods() {
-  // console.log('i ran')
-
-  document.getElementById('goods').hidden = true;
-  document.getElementById('truck').hidden = false;
-  document.getElementById('truck').className = "animate-reveal animate-first";
-
-}

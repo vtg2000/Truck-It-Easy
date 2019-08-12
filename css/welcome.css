@@ -135,3 +135,7 @@
               transform: translateY(0);
     }
   }
+
+  .card{
+    border-radius: 50px
+  }

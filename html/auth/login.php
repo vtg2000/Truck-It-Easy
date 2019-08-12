@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <?php 
@@ -13,20 +14,20 @@ session_destroy();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/register.css">
-    <link rel="stylesheet" href="../css/welcome.css">
+    <link rel="stylesheet" href="../../css/register.css">
+    <link rel="stylesheet" href="../../css/welcome.css">
 
     <title style='color: white'>Login</title>
 </head>
 
 <body style='background-image: linear-gradient(to right, #780206,#061161);'>
     <nav class="navbar navbar-dark fixed-top">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="../index.html">
             <div class='text-center'>Truck It Easy</div>
         </a>
         <div style='display:flex; flex-direction: row;'>
             <a class="nav-item nav-link" href='register.html' style="color:white">Register</a>
-            <a class="nav-item nav-link" href="index.html" style="text-decoration:none; color:white;">Home</a>
+            <a class="nav-item nav-link" href="../index.html" style="text-decoration:none; color:white;">Home</a>
         </div>
     </nav>
     <div class='animate-reveal animate-first'>

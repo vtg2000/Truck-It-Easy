@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../../css/register.css">
+    <link rel="stylesheet" href="../../css/welcome.css">
     <title>Truck It Easy</title>
 </head>
 
@@ -18,19 +20,19 @@
         </a>
         
         <a class="nav-item nav-link" style="color:white">Welcome admin!</a>
-        <a class="nav-item nav-link" onclick="logout()" href="login.php"
+        <a class="nav-item nav-link" onclick="logout()" href="../auth/login.php"
             style="text-decoration:none; color:white;">Logout</a>
     </nav>
     <div>
         <div style='display: flex'>
-            <h2 style='margin-top: 80px; color: white; margin-left: 13vw; '>Add Goods</h2>
-            <h2 style='margin-top: 80px; color: white; margin-left: 20vw; '>Add a Truck</h2>
-            <h2 style='margin-top: 80px; color: white; margin-left: 18vw; '>Add a Service</h2>
+            <h2 style='margin-top: 80px; color: white; margin-left: 13vw;  ' class='animate-reveal animate-first'>Add Goods</h2>
+            <h2 style='margin-top: 80px; color: white; margin-left: 20vw; ' class='animate-reveal animate-second'>Add a Truck</h2>
+            <h2 style='margin-top: 80px; color: white; margin-left: 18vw; ' class='animate-reveal animate-third'>Add a Service</h2>
 
         </div>
         <div style='display:flex'>
             <form action="admin.php" id="Myform" method='post'>
-                <div
+                <div class='animate-reveal animate-first'
                     style='display:flex; color:white; flex-direction: column; margin-left:10vw; background-image:linear-gradient( #9D50BB, #6E48AA); margin-right:15vw; padding: 2vw; border-radius: 20px'>
 
                     <label class='formLabel' for="">Name</label>
@@ -55,7 +57,7 @@
 
             </form>
             <form action="admin.php" id="Myform1" method='post'>
-                <div
+                <div class='animate-reveal animate-second'
                     style='display:flex; color:white; flex-direction: column;  background-image:linear-gradient( #9D50BB, #6E48AA);  padding: 2vw; border-radius: 20px; margin-right:15vw'>
 
                     <label class='formLabel' for="">Name</label>
@@ -84,7 +86,7 @@
             </form>
 
             <form action="admin.php" id="Myform1" method='post'>
-                <div
+                <div class='animate-reveal animate-third'
                     style='display:flex; color:white; flex-direction: column;  background-image:linear-gradient( #9D50BB, #6E48AA);  padding: 2vw; border-radius: 20px'>
 
                     <label class='formLabel' for="">Name</label>

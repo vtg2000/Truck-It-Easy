@@ -20,17 +20,17 @@ if (pg_num_rows($result) > 0 ) {
   $_SESSION["user1"] = $user1;
   if($user1[6] == 1)
     {
-    header("Location: http://localhost/Smart-Goods-System/html/admin.html"); 
+    header("Location: http://localhost/Smart-Goods-System/html/admin/admin.html"); 
     exit();
     }
     else
     {
-    header("Location: http://localhost/Smart-Goods-System/html/home.php"); 
+    header("Location: http://localhost/Smart-Goods-System/html/app/home.php"); 
     exit();
     }
 } 
 else {
-    header("Location: http://localhost/Smart-Goods-System/html/login.php"); 
+    header("Location: http://localhost/Smart-Goods-System/html/auth/login.php"); 
     exit();
 }
 
