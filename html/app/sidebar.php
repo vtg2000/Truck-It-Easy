@@ -3,7 +3,7 @@
  <?php if($_SESSION['user1']):
  ?>
  <nav class="navbar navbar-dark fixed-top">
-   <a class="navbar-brand" href="#">Truck It Easy</a>
+   <a class="navbar-brand" href="#" >Truck It Easy</a>
    <a class="nav-item nav-link" style="color:white"><?php echo $_SESSION["user1"][0];  ?></a>
    <a class="nav-item nav-link" href="../auth/login.php"
      style="text-decoration:none; color:white;">Logout</a>

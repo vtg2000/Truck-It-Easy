@@ -47,7 +47,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
           placeholder="Enter a destination location">
 
 
-        <div id="mode-selector" class="controls">
+        <!-- <div id="mode-selector" class="controls">
           <input type="radio" name="type" id="changemode-walking" checked="checked">
           <label for="changemode-walking">Walking</label>
 
@@ -56,10 +56,24 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
           <input type="radio" name="type" id="changemode-driving">
           <label for="changemode-driving">Driving</label>
-        </div>
+        </div> -->
       </div>
-      <div style='margin-left:100px' id="map"></div>
+      <div style='display:flex; align-items: flex-start;'>
+      <div style='margin-left:100px; min-height: 400px; ' id="map"></div>
+      <div style='display:flex; flex-direction: column; margin-left: 20px'>
+      <label style='color:white'>Distance</label>
+      <input readonly value='' id='distance' name="distance" type="text" required>
 
+      <label style='color:white'>Time</label>
+      <input readonly value='' id='time' name="time" type="text" required>
+
+      <label style='color:white'>Departure Date</label>
+      <input readonly value='' id='date' name="date" type="text" required>
+
+      <label style='color:white'>Arrival Date</label>
+      <input readonly value='' id='adate' name="adate" type="text" required>
+      </div>
+      </div>
       <button class="btn-success" type='submit'>Submit</button>
       </form>
 

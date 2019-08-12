@@ -17,6 +17,14 @@ if(isset($_POST['initial']))
 {
   $_SESSION['initial_loc'] = $_POST['initial'];
   $_SESSION['final_loc'] = $_POST['final'];
+ 
+}
+if(isset($_POST['distance']))
+{
+  $_SESSION['distance'] = $_POST['distance'];
+  $_SESSION['time'] = $_POST['time'];
+  $_SESSION['dep_date'] = $_POST['date'];
+  $_SESSION['arr_date'] = $_POST['adate'];
 }
 ?>
 
@@ -39,7 +47,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
         <h4 class='heading' style="color:white">Select the Goods</h4>
         <?php
       $sql = 'SELECT * FROM "Goods";';
-
+      
       $result = pg_query($conn, $sql);
 
       if ($result) {

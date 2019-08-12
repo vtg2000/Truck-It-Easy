@@ -33,9 +33,9 @@ function initMap() {
     // Specify just the place data fields that you need.
     destinationAutocomplete.setFields(['place_id']);
   
-    this.setupClickListener('changemode-walking', 'WALKING');
-    this.setupClickListener('changemode-transit', 'TRANSIT');
-    this.setupClickListener('changemode-driving', 'DRIVING');
+    // this.setupClickListener('changemode-walking', 'WALKING');
+    // this.setupClickListener('changemode-transit', 'TRANSIT');
+    // this.setupClickListener('changemode-driving', 'DRIVING');
   
     this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
     this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
@@ -53,10 +53,10 @@ function initMap() {
     var radioButton = document.getElementById(id);
     var me = this;
   
-    radioButton.addEventListener('click', function() {
-      me.travelMode = mode;
-      me.route();
-    });
+    // radioButton.addEventListener('click', function() {
+    //   me.travelMode = mode;
+    //   me.route();
+    // });
   };
   
   AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
@@ -90,15 +90,36 @@ function initMap() {
         {
           origin: {'placeId': this.originPlaceId},
           destination: {'placeId': this.destinationPlaceId},
-          travelMode: this.travelMode
+          travelMode: this.travelMode,
+          
         },
         function(response, status) {
           if (status === 'OK') {
             me.directionsDisplay.setDirections(response);
-            console.log(response.routes[0].legs[0])
+            console.log(response);
+            document.getElementById('distance').value = response.routes[0].legs[0].distance.text;
+            document.getElementById('time').value = response.routes[0].legs[0].duration.text;
+            nums = response.routes[0].legs[0].duration.text.split(" ");
+            
+            var d = new Date();
+            document.getElementById('date').value = d;
+            
+            if (nums[1]==='hour')
+            { 
+              minutes = parseInt(nums[0]) * 60 + parseInt(nums[2]);
+              var a = new Date(d.getTime() + minutes*60000);
+            }
+            else{
+              minutes = parseInt(nums[0]) * 1440 + parseInt(nums[2]) * 60;
+              var a = new Date(d.getTime() + minutes*60000);
+            }
+            
+            document.getElementById('adate').value = a;
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
   };
+
+
   

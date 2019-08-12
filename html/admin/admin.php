@@ -52,5 +52,5 @@ if($result){
     echo "ERROR: Could not able to execute";
 }
 
-header("Location: http://localhost/Smart-Goods-System/html/admin.html"); 
+header("Location: http://localhost/Smart-Goods-System/html/admin/admin.html"); 
 exit();
