@@ -7,3 +7,8 @@ function start_booking() {
 
 }
 
+
+
+
+ 
+// Update the current slider value (each time you drag the slider handle)

@@ -43,15 +43,15 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   <div class="div main">
     <!-- goods selector -->
     <div id='goods' class='animate-reveal animate-first'>
-      <form type='post' action='trucks.php'>
+      <form method='post' action='trucks.php'>
         <h4 class='heading' style="color:white">Select the Goods</h4>
         <?php
       $sql = 'SELECT * FROM "Goods";';
       
       $result = pg_query($conn, $sql);
-
+      $rows = pg_num_rows($result);
       if ($result) {
-        
+          echo "<input id='numrow' value=$rows hidden></input>";
           echo "<div class='card-group'>";
 
           while($row = pg_fetch_row($result)) {
@@ -59,10 +59,12 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
                 <img class='card-img-top' src='' alt='Card image cap'>
                 <div class='card-body'>
                   <h5 class='card-title'>$row[1]</h5>
-                  <p class='card-text'>$row[7]</p>
+                  <p class='card-text'>$row[6]</p>
                   <p>Weight : $row[3] Kgs</p>
                   <p class='card-text'><small class='text-muted'>$row[2]</small></p>
-                  <input type='checkbox' name=$row[0]>
+                  <input type='checkbox' name='goods[]' value=$row[0] id='mycheck$row[0]'>
+                  <input type='range' min='0' max='30' value='0' class='slider' name='quantity[]' id='myRange$row[0]' hidden>
+                  <div id='demo$row[0]'></div>
                 </div>
                 </div>
               ";
@@ -80,17 +82,10 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   </div>
 
 
-  <script src="../../js/maps.js"></script>
+  <!-- <script src="../../js/maps.js"></script> -->
   <script src="../../js/home.js"></script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpKECr67jAUyEUgY95Izgo1jSHiA4LRc0&libraries=places&callback=initMap"
-    async defer></script>
-  <script>
-    function logout() {
-      console.log('hello');
+  <script src="../../js/goods.js"></script>
 
-    }
-  </script>
 
 
 </body>

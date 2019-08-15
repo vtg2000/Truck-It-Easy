@@ -12,7 +12,6 @@
 
 <body>
 
-
   <?php
 
 // db connection
@@ -28,7 +27,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   <div class="div main">
    <!-- truck selector -->
    <div id='truck' class='animate-reveal animate-first'>
-   <form type='post' action=''>
+   <form method='post' action='booking_details.php'>
       <h4 class='heading' style="color:white">Select the Truck</h4>
       <?php
       $sql = 'SELECT * FROM "Trucks";';
@@ -48,7 +47,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
                   <p>Capacity : $row[2] Kgs</p>
                   <p class='card-text'><small class='text-muted'>Driver : $row[3]</small></p>
                   <p class='card-text'><small class='text-muted'>Contact : $row[4]</small></p>
-                  <input type='checkbox' name=$row[0]>
+                  <input type='checkbox' name='trucks[]' value=$row[0]>
                 </div>
                 </div>
               ";
@@ -66,19 +65,35 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   </div>
  
 
-  <script src="../../js/maps.js"></script>
+  <!-- <script src="../../js/maps.js"></script> -->
   <script src="../../js/home.js"></script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpKECr67jAUyEUgY95Izgo1jSHiA4LRc0&libraries=places&callback=initMap"
-    async defer></script>
-  <script>
-    function logout() {
-      console.log('hello');
+ 
 
+<?php
+if(isset($_POST['goods']))
+{
+  $goods = $_POST['goods'];
+  $quantities = $_POST['quantity'];
+  $_SESSION['goods'] = $goods;
+  $_SESSION['quantity'] = [];
+  // echo 'hiii', $_POST['quantity'];
+  foreach ($quantities as $quantity){
+    if($quantity != 0)
+    {
+      // echo 'inside if',$quantity;
+      array_push($_SESSION['quantity'], $quantity);
+    
     }
-  </script>
+    // getting goods id here, add userid and goodsid to new table user_goods
+ }
+}
+else
+{
+  echo 'noo yada';
+}
 
 
+?>
 </body>
 
 </html>
