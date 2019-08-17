@@ -26,10 +26,10 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 ?>
 
    <div class="div main">
-
+   <h4 class='heading' style="color:white; margin-top:80px">Your orders</h4>
         <div id='orders' style='color:white' class='animate-reveal animate-first'>
 
-        <h4 class='heading' style="color:white">Your orders</h4>
+        
         <?php
         $sql = 'SELECT * FROM "Booking" where "user_id"=$1;';
         $result = pg_query_params($conn, $sql, array($_SESSION['user1'][6]));
@@ -63,8 +63,9 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
                 while($row3 = pg_fetch_row($result3)){
                   echo "<p class='card-text'><small class='text-muted'>Truck : $row3[1]</small></p>";
                   }
-              
-              echo "</div>
+                  
+              echo "<p>Fare : $row[9] Rs</p>
+              </div>
               </div>
             ";
               

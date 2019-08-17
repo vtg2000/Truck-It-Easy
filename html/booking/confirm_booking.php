@@ -20,7 +20,7 @@ foreach ($_SESSION['trucks'] as $truck){
 
 $sql = array('user_id'=>$_SESSION['user1'][6],'initial_loc'=>$_SESSION['initial_loc'], 'final_loc'=>$_SESSION['final_loc'], 
 'dep_time'=>$_SESSION['dep_date'], 'arr_time'=>$_SESSION['arr_date'], 'eta'=>$_SESSION['time'], 'initial_loc'=>$_SESSION['initial_loc'],
-'truck_id'=>$mytruck, 'distance'=>$_SESSION['distance']);
+'truck_id'=>$mytruck, 'distance'=>$_SESSION['distance'], 'fare'=>$_SESSION['fare']);
 
 $result = pg_insert($conn, 'Booking', $sql);
 

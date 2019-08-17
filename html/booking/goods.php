@@ -41,10 +41,17 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
   <!-- main -->
   <div class="div main">
+  <nav aria-label="breadcrumb" >
+  <ol class="breadcrumb" style='background-color:transparent'>
+    <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Goods</li>
+  </ol>
+</nav>
     <!-- goods selector -->
+    <h4 class='heading' style="color:white">Select the Goods</h4>
     <div id='goods' class='animate-reveal animate-first'>
       <form method='post' action='trucks.php'>
-        <h4 class='heading' style="color:white">Select the Goods</h4>
+        
         <?php
       $sql = 'SELECT * FROM "Goods";';
       
@@ -56,7 +63,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
           while($row = pg_fetch_row($result)) {
               echo "<div class='card'>
-                <img class='card-img-top' src='' alt='Card image cap'>
+                <img class='card-img-top' style='height:150px' src=$row[4] alt='Card image cap'>
                 <div class='card-body'>
                   <h5 class='card-title'>$row[1]</h5>
                   <p class='card-text'>$row[6]</p>
@@ -64,7 +71,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
                   <p class='card-text'><small class='text-muted'>$row[2]</small></p>
                   <input type='checkbox' name='goods[]' value=$row[0] id='mycheck$row[0]'>
                   <input type='range' min='0' max='30' value='0' class='slider' name='quantity[]' id='myRange$row[0]' hidden>
-                  <div id='demo$row[0]'></div>
+                  <span>Quantity: <span id='demo$row[0]'></span> </span>
                 </div>
                 </div>
               ";
@@ -78,6 +85,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
         <button class="btn-success" type='submit'>Submit</button>
       </form>
     </div>
+    
     <!-- end of main -->
   </div>
 

@@ -25,36 +25,69 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
  <!-- main -->
  <div class="div main" style='color:white'>
+ <nav aria-label="breadcrumb" >
+  <ol class="breadcrumb" style='background-color:transparent'>
+    <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
+    <li class="breadcrumb-item"><a href="goods.php">Goods</a></li>
+    <li class="breadcrumb-item"><a href="trucks.php">Trucks</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Details</li>
+  </ol>
+</nav>
+
+<h4 class='heading' style="color:white">Booking Details</h4>
+ <div style='text-align:justify' class='animate-reveal animate-first'>
  <?php
 if(isset($_POST['trucks']))
 {
+  $truck_fare = 0;
+  $goods_fare = 0;
   $trucks = $_POST['trucks'];
   $_SESSION['trucks'] = $trucks;
-  echo 'Initial location : ', $_SESSION['initial_loc'];
-  echo '<br/>Final location : ', $_SESSION['final_loc'];
+  echo 'Initial location : ', $_SESSION['initial_loc'], '';
+  echo '<br/>Final location    : ', $_SESSION['final_loc'];
   echo '<br/>Departure time : ', $_SESSION['dep_date'];
   echo '<br/>Arrival time : ', $_SESSION['arr_date'];
   echo '<br/>Total time of travel : ', $_SESSION['time'];
   echo '<br/>Total distance : ', $_SESSION['distance'];
   echo '<br/>Truck selected : ';
+
+  $distance = (int)str_replace(' km','', $_SESSION['distance']);
   foreach ($_SESSION['trucks'] as $truck){ 
-    echo $truck."<br />";
+    
     $mytruck = $truck;
-    // getting truck id here, add user_id to this truck
+    $sql = 'SELECT * FROM "Trucks" where "truck_id"=$1;';
+    $result = pg_query_params($conn, $sql, array($mytruck));
+    while($row = pg_fetch_row($result)){
+    echo $row[1]."<br />";
+    
+    $truck_fare = $truck_fare +  $distance * $row[6];
+    
+    }
+    
  }
- echo 'Goods selected : ';
+ echo 'Goods selected : <br>';
+ 
+ $i = 0;
 
 foreach ($_SESSION['goods'] as $good){ 
-    echo $good."<br />";
-    // getting goods id here, add userid and goodsid to new table user_goods
+    
+    $sql = 'SELECT * FROM "Goods" where "goods_id"=$1;';
+    $result = pg_query_params($conn, $sql, array($good));
+    while($row = pg_fetch_row($result)){
+    echo $row[1] . ' &nbsp &nbsp';
+    echo 'Quantity : ', $_SESSION['quantity'][$i], '<br/>';
+    $goods_fare = $goods_fare + $distance * $row[5] * $_SESSION['quantity'][$i];
+    $i = $i + 1;
+    }
+    
  } 
- echo ' Quantities : ';
- foreach( $_SESSION['quantity'] as $quantity)
- {
-     echo $quantity."<br/>";
- }
+
+ echo 'Total fare : ', $truck_fare + $goods_fare, ' Rs </br>';
+ $_SESSION['fare'] = $truck_fare + $goods_fare;
 }
+  
  ?>
+ </div>
  
  <a href='confirm_booking.php'>
  <button class='btn btn-success'>Confirm Booking</button>

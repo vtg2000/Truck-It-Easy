@@ -25,10 +25,18 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   
   <!-- main -->
   <div class="div main">
+  <nav aria-label="breadcrumb" >
+  <ol class="breadcrumb" style='background-color:transparent'>
+    <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
+    <li class="breadcrumb-item"><a href="goods.php">Goods</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Trucks</li>
+  </ol>
+</nav>
    <!-- truck selector -->
+   <h4 class='heading' style="color:white">Select the Truck</h4>
    <div id='truck' class='animate-reveal animate-first'>
    <form method='post' action='booking_details.php'>
-      <h4 class='heading' style="color:white">Select the Truck</h4>
+      
       <?php
       $sql = 'SELECT * FROM "Trucks";';
 
@@ -89,7 +97,7 @@ if(isset($_POST['goods']))
 }
 else
 {
-  echo 'noo yada';
+  echo '';
 }
 
 

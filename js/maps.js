@@ -104,7 +104,7 @@ function initMap() {
             var d = new Date();
             document.getElementById('date').value = d;
             
-            if (nums[1]==='hour')
+            if (nums[1]==='hours')
             { 
               minutes = parseInt(nums[0]) * 60 + parseInt(nums[2]);
               var a = new Date(d.getTime() + minutes*60000);

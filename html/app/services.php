@@ -23,8 +23,8 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 // login validation
 ?>
   <div class="div main">
-
-    <div id='goods'>
+  <h4 class='heading' style="color:white; margin-top:80px">Services</h4>
+    <div id='services'>
 
       <?php
       $sql = 'SELECT * FROM "Services";';
@@ -33,7 +33,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
       if ($result) {
         
-          echo "<div class='card-group card-group-services animate-reveal animate-first'>";
+          echo "<div class='card-group animate-reveal animate-first'>";
 
           while($row = pg_fetch_row($result)) {
               echo "<div class='card'>

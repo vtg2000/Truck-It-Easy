@@ -28,16 +28,22 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   
   <!-- main -->
   <div class="div main">
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb"  >
+  <ol class="breadcrumb" style='background-color:transparent'>
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+  </nav>
     <!-- location selector -->
     <div id='start' class='animate-reveal animate-first'>
-      <h2 style='color:white; margin-left: 325px; margin-top: 100px;'>Welcome to Truck It Easy!</h2>
+      <h2 style='color:white; margin-left: 325px; '>Welcome to Truck It Easy!</h2>
       <button onclick='start_booking()' class='btn btn-success'>Start booking</button>
 
       
     </div>
 
     <div id='location' hidden>
-      <h4 class='heading' style="color:white; margin-left:300px; margin-top:100px;">Enter Starting location and
+      <h4 class='heading' style="color:white; margin-left:300px;">Enter Starting location and
         Destination</h4>
       <form method='post' action='../booking/goods.php'>
       <div style="display: none">
@@ -80,10 +86,6 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
       </form>
 
     </div>
-
-    <!-- amount, confirm booking -->
-    <!-- billing -->
-
     <!-- end of main -->
   </div>
 
