@@ -18,6 +18,7 @@
     <a href="../app/home.php">Home</a>
     <a href="../app/services.php">Services</a>
     <a href="../app/orders.php">My Orders</a>
+    <a href="../app/cards.php">My Cards</a>
     <a href="../app/contact.php">Contact Us</a>
   </div>
 
