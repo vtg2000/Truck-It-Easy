@@ -56,7 +56,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
     <!-- location selector -->
     <div id='start' class='animate-reveal animate-first'>
       <h2 style='color:white; margin-left: 325px;  '>Welcome to Truck It Easy!</h2>
-      <a href='../booking/location.php'>
+      <a href='../booking/location.php' style='text-decoration:none'>
       <button class='btn btn-success' style='margin-bottom: 10px'>Start booking</button>
       </a>
     </br>

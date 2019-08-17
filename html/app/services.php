@@ -36,8 +36,8 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
           echo "<div class='card-group animate-reveal animate-first'>";
 
           while($row = pg_fetch_row($result)) {
-              echo "<div class='card'>
-                <img class='card-img-top' src='' alt='Card image cap'>
+              echo "<div class='card' style='background-color :rgb(72, 190, 230)'>
+                <img class='card-img-top' src=$row[5] style='height:100px' alt='Card image cap'>
                 <div class='card-body'>
                   <h5 class='card-title'>$row[1]</h5>
                   <p class='card-text'>$row[2]</p>

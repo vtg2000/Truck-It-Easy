@@ -35,10 +35,11 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
         if ($result) {
           echo "<div class='card-group'>";
           while($row = pg_fetch_row($result)) {
+            $num = wordwrap($row[2], 4, '-', true);
             echo "<div class='card1'>
             
             <div class='card-body'>
-              <h5 class='card-title'>$row[2]</h5>
+              <h5 class='card-title'>$num</h5>
               <h5 class='card-text'>Full name : $row[7]</h5>
               <p>CVV : $row[5]</p>
               <p class='card-text'><small class='text-muted'>$row[3] / $row[4]</small></p>
@@ -46,9 +47,10 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
               <p>Balance : $row[6] Rs</p>
             </div>
             </div>
-            </div>
+            
               ";
           }
+          echo '<br></div><div style="margin-left:50px"><a href="add_card.php"> &nbspAdd a card</a></div>';
         }
         if(pg_num_rows($result) == 0){
             echo '<div>You have no cards yet. </div><br>';
