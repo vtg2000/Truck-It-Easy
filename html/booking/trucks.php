@@ -28,8 +28,17 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   <nav aria-label="breadcrumb" >
   <ol class="breadcrumb" style='background-color:transparent'>
     <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
+    <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
     <li class="breadcrumb-item"><a href="goods.php">Goods</a></li>
     <li class="breadcrumb-item active" aria-current="page">Trucks</li>
+    <?php if(isset($_SESSION['trucks']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['fare']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/payment.php">Payment</a></li>';
+    } ?>
   </ol>
 </nav>
    <!-- truck selector -->
@@ -66,7 +75,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
       }
       
       ?>
-      <button class="btn-success" type='submit'>Submit</button>
+      <button class="btn-success" id='trucks_submit' type='submit' style='background-color:grey' disabled>Submit</button>
       </form>
     </div>
     <!-- end of main -->
@@ -102,6 +111,7 @@ else
 
 
 ?>
+<script src="../../js/trucks.js"></script>
 </body>
 
 </html>

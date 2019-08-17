@@ -32,61 +32,75 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   <nav aria-label="breadcrumb"  >
   <ol class="breadcrumb" style='background-color:transparent'>
     <li class="breadcrumb-item active" aria-current="page">Home</li>
+  
+    <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
+    
+    <?php if(isset($_SESSION['time']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/goods.php">Goods</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['goods']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/trucks.php">Trucks</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['trucks']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['fare']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/payment.php">Payment</a></li>';
+    } ?>
   </ol>
   </nav>
     <!-- location selector -->
     <div id='start' class='animate-reveal animate-first'>
-      <h2 style='color:white; margin-left: 325px; '>Welcome to Truck It Easy!</h2>
-      <button onclick='start_booking()' class='btn btn-success'>Start booking</button>
+      <h2 style='color:white; margin-left: 325px;  '>Welcome to Truck It Easy!</h2>
+      <a href='../booking/location.php'>
+      <button class='btn btn-success' style='margin-bottom: 10px'>Start booking</button>
+      </a>
+    </br>
 
+    <?php if(isset($_SESSION['fare']))
+    {
+      echo "
+      <a href='../booking/booking_details.php'>
+      <button class='btn btn-success' style='margin-left:435px;'>Continue booking</button>
+      </a>
+      ";
+    }
+    elseif(isset($_SESSION['trucks']))
+    {
+      echo "
+      <a href='../booking/booking_details.php'>
+      <button class='btn btn-success' style='margin-left:435px'>Continue booking</button>
+      </a>
+      ";
+    }
+    elseif(isset($_SESSION['goods']))
+    {
+      echo "
+      <a href='../booking/trucks.php'>
+      <button class='btn btn-success' style='margin-left:435px'>Continue booking</button>
+      </a>
+      ";
+    }
+    elseif(isset($_SESSION['time']))
+    {
+      echo "
+      <a href='../booking/goods.php'>
+      <button class='btn btn-success' style='margin-left:435px'>Continue booking</button>
+      </a>
+      ";
+    }
+      ?>
+    
+
+    
       
     </div>
 
-    <div id='location' hidden>
-      <h4 class='heading' style="color:white; margin-left:300px;">Enter Starting location and
-        Destination</h4>
-      <form method='post' action='../booking/goods.php'>
-      <div style="display: none">
-
-        <input id="origin-input" name="initial" class="controls" required type="text"
-          placeholder="Enter an origin location">
-
-        <input id="destination-input" required name="final" class="controls" type="text"
-          placeholder="Enter a destination location">
-
-
-        <!-- <div id="mode-selector" class="controls">
-          <input type="radio" name="type" id="changemode-walking" checked="checked">
-          <label for="changemode-walking">Walking</label>
-
-          <input type="radio" name="type" id="changemode-transit">
-          <label for="changemode-transit">Transit</label>
-
-          <input type="radio" name="type" id="changemode-driving">
-          <label for="changemode-driving">Driving</label>
-        </div> -->
-      </div>
-      <div style='display:flex; align-items: flex-start;'>
-      <div style='margin-left:100px; min-height: 400px; ' id="map"></div>
-      <div style='display:flex; flex-direction: column; margin-left: 20px'>
-      <label style='color:white'>Distance</label>
-      <input readonly value='' id='distance' name="distance" type="text" required>
-
-      <label style='color:white'>Time</label>
-      <input readonly value='' id='time' name="time" type="text" required>
-
-      <label style='color:white'>Departure Date</label>
-      <input readonly value='' id='date' name="date" type="text" required>
-
-      <label style='color:white'>Arrival Date</label>
-      <input readonly value='' id='adate' name="adate" type="text" required>
-      </div>
-      </div>
-      <button class="btn-success" type='submit'>Submit</button>
-      </form>
-
-    </div>
-    <!-- end of main -->
+    
   </div>
 
   <script src="../../js/maps.js"></script>

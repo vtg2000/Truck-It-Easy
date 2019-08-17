@@ -44,7 +44,20 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   <nav aria-label="breadcrumb" >
   <ol class="breadcrumb" style='background-color:transparent'>
     <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
+    <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
     <li class="breadcrumb-item active" aria-current="page">Goods</li>
+    <?php if(isset($_SESSION['goods']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/trucks.php">Trucks</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['trucks']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['fare']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/payment.php">Payment</a></li>';
+    } ?>
   </ol>
 </nav>
     <!-- goods selector -->
@@ -82,7 +95,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
       }
       
       ?>
-        <button class="btn-success" type='submit'>Submit</button>
+        <button class="btn-success" type='submit' id='goods_submit' style='background-color:grey ' disabled>Submit</button>
       </form>
     </div>
     

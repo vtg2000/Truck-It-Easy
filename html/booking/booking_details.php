@@ -28,21 +28,29 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
  <nav aria-label="breadcrumb" >
   <ol class="breadcrumb" style='background-color:transparent'>
     <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
+    <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
     <li class="breadcrumb-item"><a href="goods.php">Goods</a></li>
     <li class="breadcrumb-item"><a href="trucks.php">Trucks</a></li>
     <li class="breadcrumb-item active" aria-current="page">Details</li>
+    <?php if(isset($_SESSION['fare']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/payment.php">Payment</a></li>';
+    } ?>
   </ol>
 </nav>
 
 <h4 class='heading' style="color:white">Booking Details</h4>
- <div style='text-align:justify' class='animate-reveal animate-first'>
+ <div style='text-align:justify; margin-left: 100px' class='animate-reveal animate-first'>
  <?php
 if(isset($_POST['trucks']))
 {
-  $truck_fare = 0;
-  $goods_fare = 0;
+  
   $trucks = $_POST['trucks'];
   $_SESSION['trucks'] = $trucks;
+}
+$truck_fare = 0;
+  $goods_fare = 0;
+  // $_SESSION['trucks'] = $trucks;
   echo 'Initial location : ', $_SESSION['initial_loc'], '';
   echo '<br/>Final location    : ', $_SESSION['final_loc'];
   echo '<br/>Departure time : ', $_SESSION['dep_date'];
@@ -51,7 +59,8 @@ if(isset($_POST['trucks']))
   echo '<br/>Total distance : ', $_SESSION['distance'];
   echo '<br/>Truck selected : ';
 
-  $distance = (int)str_replace(' km','', $_SESSION['distance']);
+  $distance = (int)str_replace(' km','', str_replace(',','',$_SESSION['distance']));
+
   foreach ($_SESSION['trucks'] as $truck){ 
     
     $mytruck = $truck;
@@ -64,7 +73,7 @@ if(isset($_POST['trucks']))
     
     }
     
- }
+  }
  echo 'Goods selected : <br>';
  
  $i = 0;
@@ -76,6 +85,7 @@ foreach ($_SESSION['goods'] as $good){
     while($row = pg_fetch_row($result)){
     echo $row[1] . ' &nbsp &nbsp';
     echo 'Quantity : ', $_SESSION['quantity'][$i], '<br/>';
+    
     $goods_fare = $goods_fare + $distance * $row[5] * $_SESSION['quantity'][$i];
     $i = $i + 1;
     }
@@ -84,27 +94,20 @@ foreach ($_SESSION['goods'] as $good){
 
  echo 'Total fare : ', $truck_fare + $goods_fare, ' Rs </br>';
  $_SESSION['fare'] = $truck_fare + $goods_fare;
-}
+ 
   
  ?>
+ <a href='payment.php'>
+ <button class='btn btn-success topay'>Proceed to Payment</button>
+</a>
  </div>
  
- <a href='confirm_booking.php'>
- <button class='btn btn-success'>Confirm Booking</button>
-</a>
+ 
  </div>
  <!-- end of main -->
 
- <script src="../../js/maps.js"></script>
+ 
  <script src="../../js/home.js"></script>
- <script
-   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpKECr67jAUyEUgY95Izgo1jSHiA4LRc0&libraries=places&callback=initMap"
-   async defer></script>
- <script>
-   function logout() {
-     console.log('hello');
-
-   }
  </script>
 
  
