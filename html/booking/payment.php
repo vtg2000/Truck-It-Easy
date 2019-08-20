@@ -42,7 +42,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
             <form method='post' action='confirm_booking.php'>
 
                 <!-- Credit card form content -->
-                <div class="tab-content" style='width:500px'>
+                <div class="tab-content" style='width:500px; margin-left: 200px'>
 
                     <!-- credit card info-->
                     <div id="nav-tab-card" class="tab-pane fade show active">
@@ -101,7 +101,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
                 </div>
                 <a href='confirm_booking.php'>
-                    <button class='btn btn-success' type='submit'>Confirm Booking and Pay</button>
+                    <button class='btn btn-success' type='submit' style='margin-left: 340px'>Confirm Booking and Pay</button>
                 </a>
             </form>
         </div>

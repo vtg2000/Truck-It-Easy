@@ -6,7 +6,6 @@ let output = []
 
 
 
-
 let num_rows = parseInt(document.getElementById('numrow').value) 
 console.log(num_rows)
 for( let i = 1; i < num_rows + 1   ; i++)

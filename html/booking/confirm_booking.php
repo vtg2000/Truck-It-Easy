@@ -56,8 +56,12 @@ if($result){
     // check credit cards of user
     $sql4 = 'SELECT * from "Credit_Cards" where "user_id"= $1;';
     $result4 = pg_query_params($conn, $sql4 ,array($_SESSION['user1'][6]));
-    if (pg_num_rows($result4) > 0 ) {
-            $card = pg_fetch_row($result4);  
+    $numrows = pg_num_rows($result4);
+    if ($numrows > 0 ) {
+        while($numrows > 0){
+        echo (pg_num_rows($result4));
+        
+        $card = pg_fetch_row($result4);  
 
         $sql = array('booking_id'=>$booking[0], 'user_id'=>$_SESSION['user1'][6], 'amount'=>$_SESSION['amount'], 'card_number'=>$_SESSION['card_number'],
         'month'=>$_SESSION['month'], 'year'=>$_SESSION['year'], 'cvv'=>$_SESSION['cvv'], 'full_name'=>$_SESSION['full_name'] );
@@ -88,21 +92,23 @@ if($result){
             }
             else{
                 // else payment is unsuccessful
-                echo 'payment unsuccessful';
-                $sql5 = 'DELETE from "Booking" where "booking_id"= $1;';
-                $result5 = pg_query_params($conn, $sql5 ,array($booking[0]));
-                // hence delete booking data, cascades onto other tables
-                if($result5)
-                {
-                    echo 'successfully deleted booking data';
-                }
-                header("Location: http://localhost/Smart-Goods-System/html/booking/payment.php?failure"); 
-                exit();
+                echo $new_amount, $card['2'] == $_SESSION['card_number'] , $card['2'];
+                echo 'payment unsuccessful in else 1';
+                // $sql5 = 'DELETE from "Booking" where "booking_id"= $1;';
+                // $result5 = pg_query_params($conn, $sql5 ,array($booking[0]));
+                // // hence delete booking data, cascades onto other tables
+                // if($result5)
+                // {
+                //     echo 'successfully deleted booking data';
+                // }
+                // header("Location: http://localhost/Smart-Goods-System/html/booking/payment.php?failure"); 
+                // exit();
             }
-    }
+            $numrows = $numrows - 1;
+    }}
     else
     {
-        echo 'payment unsuccessful';
+        echo 'payment unsuccessful in else 2';
         $sql5 = 'DELETE from "Booking" where "booking_id"= $1;';
         $result5 = pg_query_params($conn, $sql5 ,array($booking[0]));
         // hence delete booking data, cascades onto other tables
