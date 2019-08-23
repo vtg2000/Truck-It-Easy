@@ -40,35 +40,54 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 ?>
 
   <!-- main -->
+  
   <div class="div main">
-  <nav aria-label="breadcrumb" >
-  <ol class="breadcrumb" style='background-color:transparent'>
-    <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
-    <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Goods</li>
-    <?php if(isset($_SESSION['goods']))
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" style='background-color:transparent'>
+        <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
+        <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Goods</li>
+        <?php if(isset($_SESSION['goods']))
     {
       echo '<li class="breadcrumb-item"><a href="../booking/trucks.php">Trucks</a></li>';
     } ?>
-    <?php if(isset($_SESSION['trucks']))
+        <?php if(isset($_SESSION['trucks']))
     {
       echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
     } ?>
-    <?php if(isset($_SESSION['fare']))
+        <?php if(isset($_SESSION['fare']))
     {
       echo '<li class="breadcrumb-item"><a href="../booking/payment.php">Payment</a></li>';
     } ?>
-  </ol>
-</nav>
+      </ol>
+    </nav>
     <!-- goods selector -->
     <h4 class='heading' style="color:white">Select the Goods</h4>
     <div id='goods' class='animate-reveal animate-first'>
       <form method='post' action='trucks.php'>
-        
+
         <?php
-      $sql = 'SELECT * FROM "Goods";';
       
+      if(isset($_POST['Electronics']))
+      {
+        $sql = 'SELECT * FROM "Goods" where "category" = $1;';
+        $result = pg_query_params($conn, $sql, array("Electronics"));
+      }
+      elseif(isset($_POST['Furniture']))
+      {
+        $sql = 'SELECT * FROM "Goods" where "category" = $1;';
+        $result = pg_query_params($conn, $sql, array("Furniture"));
+      }
+      elseif(isset($_POST['Other']))
+      {
+        $sql = 'SELECT * FROM "Goods" where "category" = $1;';
+        $result = pg_query_params($conn, $sql, array("Other"));
+      }
+      else{
+      $sql = 'SELECT * FROM "Goods";';
       $result = pg_query($conn, $sql);
+      }
+      
       $rows = pg_num_rows($result);
       if ($result) {
           echo "<input id='numrow' value=$rows hidden></input>";
@@ -76,6 +95,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
           while($row = pg_fetch_row($result)) {
               echo "<div class='card'>
+                <input class='rowid' value=$row[0] hidden></input>
                 <img class='card-img-top' style='height:150px' src=$row[4] alt='Card image cap'>
                 <div class='card-body'>
                   <h5 class='card-title'>$row[1]</h5>
@@ -95,12 +115,40 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
       }
       
       ?>
-        <button class="btn-success" type='submit' id='goods_submit' style='background-color:grey ' disabled>Submit</button>
+        <button class="btn-success" type='submit' id='goods_submit' style='background-color:grey '
+          disabled>Submit</button>
       </form>
     </div>
-    
+
     <!-- end of main -->
   </div>
+
+  <div class='right-sidebar'>
+  <h2>Filter</h2>
+  <h5>By Category</h5>
+
+  <form id="form" method="post" action="goods.php">
+
+  <input type='checkbox' name='Electronics' onchange="document.getElementById('form').submit();">
+  <label>Electronics</label>
+  <br>
+  
+  <input type='checkbox' name='Furniture' onchange="document.getElementById('form').submit();">
+  <label>Furniture</label>
+  <br>
+
+  <input type='checkbox' name='Other' onchange="document.getElementById('form').submit();">
+  <label>Other</label>
+  <br>
+
+  <input type='checkbox' name='None' onchange="document.getElementById('form').submit();">
+  <label>None</label>
+  <br>
+  
+  </form>
+
+  </div>
+  
 
 
   <!-- <script src="../../js/maps.js"></script> -->

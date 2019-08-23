@@ -39,10 +39,10 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
         </nav>
         <div>
 
-            <form method='post' action='confirm_booking.php'>
+            <form method='post' action='confirm_booking.php' class='animate-reveal animate-first'>
 
                 <!-- Credit card form content -->
-                <div class="tab-content" style='width:500px; margin-left: 200px'>
+                <div class="tab-content" style='width:500px; margin-left: 200px' >
 
                     <!-- credit card info-->
                     <div id="nav-tab-card" class="tab-pane fade show active">

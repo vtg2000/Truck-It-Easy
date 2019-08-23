@@ -1,4 +1,4 @@
-<?php include("../app/sidebar.php"); ?>     
+<?php include("../app/sidebar.php"); ?>
 <html>
 
 <head>
@@ -22,71 +22,9 @@ $dbname = "postgres";
 $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username password=vtg@2000 connect_timeout=5");
 
 ?>
-  
-  <!-- main -->
-  <div class="div main">
-  <nav aria-label="breadcrumb" >
-  <ol class="breadcrumb" style='background-color:transparent'>
-    <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
-    <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
-    <li class="breadcrumb-item"><a href="goods.php">Goods</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Trucks</li>
-    <?php if(isset($_SESSION['trucks']))
-    {
-      echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
-    } ?>
-    <?php if(isset($_SESSION['fare']))
-    {
-      echo '<li class="breadcrumb-item"><a href="../booking/payment.php">Payment</a></li>';
-    } ?>
-  </ol>
-</nav>
-   <!-- truck selector -->
-   <h4 class='heading' style="color:white">Select the Truck</h4>
-   <div id='truck' class='animate-reveal animate-first'>
-   <form method='post' action='booking_details.php'>
-      
-      <?php
-      $sql = 'SELECT * FROM "Trucks";';
 
-      $result = pg_query($conn, $sql);
 
-      if ($result) {
-        
-          echo "<div class='card-group'>";
-
-          while($row = pg_fetch_row($result)) {
-              echo "<div class='card'>
-                <img class='card-img-top' src='' alt='Card image cap'>
-                <div class='card-body'>
-                  <h5 class='card-title'>$row[1]</h5>
-                  <p class='card-text'>$row[7]</p>
-                  <p>Capacity : $row[2] Kgs</p>
-                  <p class='card-text'><small class='text-muted'>Driver : $row[3]</small></p>
-                  <p class='card-text'><small class='text-muted'>Contact : $row[4]</small></p>
-                  <input type='checkbox' name='trucks[]' value=$row[0]>
-                </div>
-                </div>
-              ";
-          }
-          echo "</div>";
-      } else {
-          echo "0 results";
-      }
-      
-      ?>
-      <button class="btn-success" id='trucks_submit' type='submit' style='background-color:grey' disabled>Submit</button>
-      </form>
-    </div>
-    <!-- end of main -->
-  </div>
- 
-
-  <!-- <script src="../../js/maps.js"></script> -->
-  <script src="../../js/home.js"></script>
- 
-
-<?php
+  <?php
 if(isset($_POST['goods']))
 {
   $goods = $_POST['goods'];
@@ -103,15 +41,164 @@ if(isset($_POST['goods']))
     }
     // getting goods id here, add userid and goodsid to new table user_goods
  }
+ 
 }
 else
 {
   echo '';
 }
 
+$cap = 0;
+$i = 0;
+foreach ($_SESSION['goods'] as $good){ 
+    
+  $sql = 'SELECT * FROM "Goods" where "goods_id"=$1;';
+  $result = pg_query_params($conn, $sql, array($good));
+  while($row = pg_fetch_row($result)){
+  $cap = $cap + $row[3] * $_SESSION['quantity'][$i];
+  }
+  $i =$i + 1;
+} 
+echo $cap;
+
 
 ?>
-<script src="../../js/trucks.js"></script>
+
+  <!-- main -->
+  <div class="div main">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" style='background-color:transparent'>
+        <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
+        <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
+        <li class="breadcrumb-item"><a href="goods.php">Goods</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Trucks</li>
+        <?php if(isset($_SESSION['trucks']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
+    } ?>
+        <?php if(isset($_SESSION['fare']))
+    {
+      echo '<li class="breadcrumb-item"><a href="../booking/payment.php">Payment</a></li>';
+    } ?>
+      </ol>
+    </nav>
+    <!-- truck selector -->
+    <h4 class='heading' style="color:white">Select the Truck</h4>
+    <div id='truck' class='animate-reveal animate-first'>
+      <form method='post' action='booking_details.php'>
+
+        <?php
+        if(isset($_POST['c2500']))
+        {
+          $sql = 'SELECT * FROM "Trucks" where "capacity" <= $1;';
+          $result = pg_query_params($conn, $sql, array(2500));
+        }
+        elseif(isset($_POST['c3500'])){
+          $sql = 'SELECT * FROM "Trucks" where "capacity" <= $1 and "capacity" >= $2;';
+          $result = pg_query_params($conn, $sql, array(3500, 2500));
+        }
+        elseif(isset($_POST['c4500'])){
+          $sql = 'SELECT * FROM "Trucks" where "capacity" <= $1 and "capacity" >= $2;';
+          $result = pg_query_params($conn, $sql, array(4500, 3500));
+        }
+        else{
+      $sql = 'SELECT * FROM "Trucks";';
+
+      $result = pg_query($conn, $sql);
+        }
+
+      if ($result) {
+        
+          echo "<div class='card-group'>";
+
+          while($row = pg_fetch_row($result)) {
+              echo "<div class='card'>
+                <img class='card-img-top' src=$row[5] alt='Card image cap'>
+                <div class='card-body'>
+                  <h5 class='card-title'>$row[1]</h5>
+                  <p class='card-text'>$row[7]</p>
+                  <p>Capacity : $row[2] Kgs</p>
+                  <p class='card-text'><small class='text-muted'>Driver : $row[3]</small></p>
+                  <p class='card-text'><small class='text-muted'>Contact : $row[4]</small></p>
+                  <input type='checkbox' name='trucks[]' value=$row[0]>
+                </div>
+                </div>
+              ";
+          }
+          echo "</div>";
+      } else {
+          echo "0 results";
+      }
+      
+      if(isset($cap))
+      { 
+        $sql1 = 'SELECT * FROM "Trucks" where "capacity" >= $1 order by "capacity";';
+        $result1 = pg_query_params($conn, $sql1, array($cap));
+      
+      if($result1)
+      {
+        echo "<h3 style='color: white; margin-left:50px'>Recommended</h3>";
+        echo "<div class='card-group'>";
+
+          if($row = pg_fetch_row($result1)) {
+              echo "<div class='card'>
+                <img class='card-img-top' src=$row[5] alt='Card image cap'>
+                <div class='card-body'>
+                  <h5 class='card-title'>$row[1]</h5>
+                  <p class='card-text'>$row[7]</p>
+                  <p>Capacity : $row[2] Kgs</p>
+                  <p class='card-text'><small class='text-muted'>Driver : $row[3]</small></p>
+                  <p class='card-text'><small class='text-muted'>Contact : $row[4]</small></p>
+                  <input type='checkbox' name='trucks[]' value=$row[0]>
+                </div>
+                </div>
+              ";
+          }
+          echo "</div>";
+      }
+    }
+      ?>
+
+      
+        <button class="btn-success" id='trucks_submit' type='submit' style='background-color:grey'
+          disabled>Submit</button>
+      </form>
+    </div>
+    <!-- end of main -->
+  </div>
+
+  <div class='right-sidebar'>
+  <h2>Filter</h2>
+  <h5>By Capacity</h5>
+
+  <form id="form" method="post" action="trucks.php">
+
+  <input type='radio' name='c2500' onchange="document.getElementById('form').submit();">
+  <label><2500 Kgs</label>
+  <br>
+  
+  <input type='radio' name='c3500' onchange="document.getElementById('form').submit();">
+  <label>>2500 Kgs <3500 Kgs</label>
+  <br>
+
+  <input type='radio' name='c4500' onchange="document.getElementById('form').submit();">
+  <label>>3500 Kgs <4500 Kgs</label>
+  <br>
+  
+  <input type='radio' name='None' onchange="document.getElementById('form').submit();">
+  <label>None</label>
+  <br>
+
+  </form>
+
+  </div>
+
+
+  <!-- <script src="../../js/maps.js"></script> -->
+  <script src="../../js/home.js"></script>
+
+
+  <script src="../../js/trucks.js"></script>
 </body>
 
 </html>
