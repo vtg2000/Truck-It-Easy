@@ -59,7 +59,7 @@ foreach ($_SESSION['goods'] as $good){
   }
   $i =$i + 1;
 } 
-echo $cap;
+// echo $cap;
 
 
 ?>
@@ -88,7 +88,13 @@ echo $cap;
       <form method='post' action='booking_details.php'>
 
         <?php
-        if(isset($_POST['c2500']))
+        if(isset($_POST['search']))
+        {
+          $sql = 'SELECT * FROM "Trucks" where lower("name") like lower($1);';
+          $value = array('%'.$_POST['search'].'%');
+          $result = pg_query_params($conn, $sql, $value);
+        }
+        elseif(isset($_POST['c2500']))
         {
           $sql = 'SELECT * FROM "Trucks" where "capacity" <= $1;';
           $result = pg_query_params($conn, $sql, array(2500));
@@ -102,7 +108,7 @@ echo $cap;
           $result = pg_query_params($conn, $sql, array(4500, 3500));
         }
         else{
-      $sql = 'SELECT * FROM "Trucks";';
+      $sql = 'SELECT * FROM "Trucks" order by "capacity";';
 
       $result = pg_query($conn, $sql);
         }
@@ -118,12 +124,20 @@ echo $cap;
                   <h5 class='card-title'>$row[1]</h5>
                   <p class='card-text'>$row[7]</p>
                   <p>Capacity : $row[2] Kgs</p>
-                  <p class='card-text'><small class='text-muted'>Driver : $row[3]</small></p>
+                  
+                 <p class='card-text'><small class='text-muted'>Driver : $row[3]</small></p>
                   <p class='card-text'><small class='text-muted'>Contact : $row[4]</small></p>
-                  <input type='checkbox' name='trucks[]' value=$row[0]>
-                </div>
+                  <input type='checkbox' name='trucks[]'"; if($row[2] < $cap){echo "disabled";} echo" value=$row[0]>";
+                  if($row[2] < $cap)
+                  {
+                    echo "<p class='card-text' style='color:red'>Insufficient capacity</p>";
+                  }
+                echo "</div>
+                
+                
                 </div>
               ";
+              
           }
           echo "</div>";
       } else {
@@ -168,6 +182,12 @@ echo $cap;
   </div>
 
   <div class='right-sidebar'>
+  <h2>Search</h2>
+  <form method="post" action="trucks.php">
+  
+  <input placeholder='Enter Truck name' name='search'>
+  <button type='submit' hidden></button>
+  </form>
   <h2>Filter</h2>
   <h5>By Capacity</h5>
 
@@ -186,7 +206,7 @@ echo $cap;
   <br>
   
   <input type='radio' name='None' onchange="document.getElementById('form').submit();">
-  <label>None</label>
+  <label>All</label>
   <br>
 
   </form>

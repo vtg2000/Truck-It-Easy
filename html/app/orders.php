@@ -46,7 +46,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
               <h5 class='card-text'>To : $row[4]</h5>
               <p>Time : $row[5]</p>
               <p class='card-text'><small class='text-muted'>Departure : $row[6]</small></p>
-              <p class='card-text'><small class='text-muted'>Arrival : $row[7]</small></p>
+              <p class='card-text'><small class='text-muted  arr'>Arrival : $row[7]</small></p>
               ";
               $result1 = pg_query_params($conn, $sql1, array($row[0]));
                 while($row1 = pg_fetch_row($result1))
@@ -65,6 +65,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
                   }
                   
               echo "<p>Fare : $row[9] Rs</p>
+              <div class='mystatus'></div>
               </div>
               </div>
             ";
@@ -83,6 +84,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
         </div>
    </div>
+   <script src="../../js/orders.js"></script>
 </body>
 </head>
      

@@ -67,8 +67,13 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
       <form method='post' action='trucks.php'>
 
         <?php
-      
-      if(isset($_POST['Electronics']))
+      if(isset($_POST['search']))
+      {
+        $sql = 'SELECT * FROM "Goods" where lower("name") like lower($1);';
+        $value = array('%'.$_POST['search'].'%');
+        $result = pg_query_params($conn, $sql, $value);
+      }
+      elseif(isset($_POST['Electronics']))
       {
         $sql = 'SELECT * FROM "Goods" where "category" = $1;';
         $result = pg_query_params($conn, $sql, array("Electronics"));
@@ -124,6 +129,14 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   </div>
 
   <div class='right-sidebar'>
+  <h2>Search</h2>
+
+  <form method="post" action="goods.php">
+  
+  <input placeholder='Enter Goods name' name='search'>
+  <button type='submit' hidden></button>
+  </form>
+
   <h2>Filter</h2>
   <h5>By Category</h5>
 
@@ -142,7 +155,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   <br>
 
   <input type='checkbox' name='None' onchange="document.getElementById('form').submit();">
-  <label>None</label>
+  <label>All</label>
   <br>
   
   </form>
