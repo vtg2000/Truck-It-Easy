@@ -16,7 +16,7 @@
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
     color: #b1afaf;
     display: block;
   }
@@ -106,7 +106,8 @@
     max-width: 200px;
     min-width: 200px;
     margin-bottom: 15px !important;
-    background-color:lightblue 
+    background-color:rgb(72, 190, 230) ;
+    color: black;
 }
   
   body{

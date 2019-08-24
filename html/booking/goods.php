@@ -129,15 +129,25 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   </div>
 
   <div class='right-sidebar'>
-  <h2>Search</h2>
+  <h2>Search<i class="fa fa-search fa-fw"></i></h2>
 
   <form method="post" action="goods.php">
   
   <input placeholder='Enter Goods name' name='search'>
+
+  <?php if(isset($_POST['search']))
+  {
+    
+    echo 
+    "<button type='submit' style='margin-top: 12px; margin-left: 30px'>Clear results</button>"
+   ;
+  }
+  ?>
+ 
   <button type='submit' hidden></button>
   </form>
 
-  <h2>Filter</h2>
+  <h2>Filter<i class="fa fa-filter fa-fw"></i></h2>
   <h5>By Category</h5>
 
   <form id="form" method="post" action="goods.php">

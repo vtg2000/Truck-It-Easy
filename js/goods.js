@@ -16,6 +16,22 @@ for( let j = 0; j < something.length; j++)
   {
     console.log(i)
     output[i].innerHTML = e.target.value
+    if(slider[i].value == 0)
+    {
+      check[i].checked = false;
+      slider[i].hidden = true;
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+      if(checkedOne)
+    {
+      document.getElementById('goods_submit').disabled = false;
+      document.getElementById('goods_submit').style.backgroundColor = 'green';
+    }
+    else{
+      document.getElementById('goods_submit').disabled = true;
+      document.getElementById('goods_submit').style.backgroundColor = 'grey';
+    }
+    }
   }
 }
 
@@ -31,15 +47,15 @@ for( let j = 0; j < something.length; j++)
   {
     console.log('hii')
     slider[i].hidden ?
-    (slider[i].hidden = false )
-    : (slider[i].hidden = true, output[i].innerHTML = '0');
-
+    (slider[i].hidden = false, slider[i].value = 1 )
+    : (slider[i].hidden = true,  slider[i].value = 0);
+    
+    output[i].innerHTML = slider[i].value;
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
     
     if(checkedOne)
     {
-      
       document.getElementById('goods_submit').disabled = false;
       document.getElementById('goods_submit').style.backgroundColor = 'green';
     }

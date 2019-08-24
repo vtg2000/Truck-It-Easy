@@ -31,7 +31,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
         
         <?php
-        $sql = 'SELECT * FROM "Booking" where "user_id"=$1;';
+        $sql = 'SELECT * FROM "Booking" where "user_id"=$1 order by "fare";';
         $result = pg_query_params($conn, $sql, array($_SESSION['user1'][6]));
         $sql1 = 'SELECT * FROM "Goods_Booking" where "booking_id"=$1;';
         

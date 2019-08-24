@@ -14,14 +14,18 @@
 
  <div class="div main">
     
- <div style='margin-left:420px; color: green'>Payment was successful
+ <div style='margin-left:420px; margin-top: 100px; color: green'>Payment was successful
  </div>
+ 
      <a href='../app/home.php'>
-    <button class='btn-success'>
+    <button class='btn btn-success'>
         Back to home
     </button>
     </a>
+   
+    
   </div>
+  
 
 
 </body>

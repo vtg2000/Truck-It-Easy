@@ -47,7 +47,7 @@ if (isset($_POST['edname']))
    <h4 class='heading' style="color:white; margin-top:80px">Profile</h4>
        
 
-        <div class='animate-reveal animate-first'>
+        <div class='animate-reveal animate-first' style='margin-left: 230px; margin-top: 50px'>
         <div id='profile' style='color:white; margin-top:10px; margin-left: 100px; width: 400px; text-align: justify'>
         <div>Name : <?php echo $_SESSION['user1'][0] ; ?></div>
         <div>Phone no : <?php echo $_SESSION['user1'][1] ; ?></div>

@@ -51,48 +51,76 @@ if(isset($_POST['trucks']))
 $truck_fare = 0;
   $goods_fare = 0;
   // $_SESSION['trucks'] = $trucks;
-  echo 'Initial location : ', $_SESSION['initial_loc'], '';
-  echo '<br/>Final location    : ', $_SESSION['final_loc'];
-  echo '<br/>Departure time : ', $_SESSION['dep_date'];
-  echo '<br/>Arrival time : ', $_SESSION['arr_date'];
-  echo '<br/>Total time of travel : ', $_SESSION['time'];
-  echo '<br/>Total distance : ', $_SESSION['distance'];
-  echo '<br/>Truck selected : ';
+  echo 'Initial location <b>: ', $_SESSION['initial_loc'], '</b>';
+  echo '<br/>Final location    <b>: ', $_SESSION['final_loc'], '</b>';
+  echo '<br/>Departure time <b>: ', $_SESSION['dep_date'], '</b>';
+  echo '<br/>Arrival time <b>: ', $_SESSION['arr_date'], '</b>';
+  echo '<br/>Total time of travel <b>: ', $_SESSION['time'], '</b>';
+  echo '<br/>Total distance <b>: ', $_SESSION['distance'], '</b>';
+  
 
   $distance = (int)str_replace(' km','', str_replace(',','',$_SESSION['distance']));
 
-  foreach ($_SESSION['trucks'] as $truck){ 
-    
-    $mytruck = $truck;
-    $sql = 'SELECT * FROM "Trucks" where "truck_id"=$1;';
-    $result = pg_query_params($conn, $sql, array($mytruck));
-    while($row = pg_fetch_row($result)){
-    echo $row[1]."<br />";
-    
-    $truck_fare = $truck_fare +  $distance * $row[6];
-    
-    }
-    
-  }
- echo 'Goods selected : <br>';
+ echo '<br>Goods selected : <br>';
  
  $i = 0;
-
+ echo "<div class='card-group'>";
 foreach ($_SESSION['goods'] as $good){ 
     
     $sql = 'SELECT * FROM "Goods" where "goods_id"=$1;';
     $result = pg_query_params($conn, $sql, array($good));
+    
     while($row = pg_fetch_row($result)){
-    echo $row[1] . ' &nbsp &nbsp';
-    echo 'Quantity : ', $_SESSION['quantity'][$i], '<br/>';
+    // echo $row[1] . ' &nbsp &nbsp';
+    echo "<div class='card'>
+                <input class='rowid' value=$row[0] hidden></input>
+                <img class='card-img-top' style='height:150px' src=$row[4] alt='Card image cap'>
+                <div class='card-body'>
+                  <h5 class='card-title'>$row[1]</h5>
+                  <p class='card-text'>$row[6]</p>
+                  <p>Weight : $row[3] Kgs</p>
+                  <p class='card-text'><small class='text-muted'>$row[2]</small></p>
+                  <span>Quantity: ",$_SESSION['quantity'][$i], "<span id='demo$row[0]'></span> </span>
+                </div>
+                </div>
+              ";
+    
     
     $goods_fare = $goods_fare + $distance * $row[5] * $_SESSION['quantity'][$i];
     $i = $i + 1;
     }
+   
     
  } 
+ echo "</div>";
 
- echo 'Total fare : ', $truck_fare + $goods_fare, ' Rs </br>';
+ echo 'Truck selected : ';
+ foreach ($_SESSION['trucks'] as $truck){ 
+    
+  $mytruck = $truck;
+  $sql = 'SELECT * FROM "Trucks" where "truck_id"=$1;';
+  $result = pg_query_params($conn, $sql, array($mytruck));
+  echo "<div class='card-group'>";
+  while($row = pg_fetch_row($result)){
+    echo "<div class='card'>
+    <img class='card-img-top' src=$row[5] alt='Card image cap'>
+    <div class='card-body'>
+      <h5 class='card-title'>$row[1]</h5>
+      <p class='card-text'>$row[7]</p>
+      <p>Capacity : $row[2] Kgs</p>
+      <p class='card-text'><small class='text-muted'>Driver : $row[3]</small></p>
+      <p class='card-text'><small class='text-muted'>Contact : $row[4]</small></p>
+    </div>
+    </div>
+  ";
+  
+  $truck_fare = $truck_fare +  $distance * $row[6];
+  
+  }
+  echo "</div>";
+  
+}
+ echo '<b>Total fare : ', $truck_fare + $goods_fare, ' Rs </b></br>';
  $_SESSION['fare'] = $truck_fare + $goods_fare;
  
   
