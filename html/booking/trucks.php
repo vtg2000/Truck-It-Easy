@@ -97,15 +97,20 @@ foreach ($_SESSION['goods'] as $good){
         elseif(isset($_POST['c2500']))
         {
           $sql = 'SELECT * FROM "Trucks" where "capacity" <= $1;';
-          $result = pg_query_params($conn, $sql, array(2500));
+          $result = pg_query_params($conn, $sql, array(5000));
         }
         elseif(isset($_POST['c3500'])){
           $sql = 'SELECT * FROM "Trucks" where "capacity" <= $1 and "capacity" >= $2;';
-          $result = pg_query_params($conn, $sql, array(3500, 2500));
+          $result = pg_query_params($conn, $sql, array(10000, 5000));
         }
         elseif(isset($_POST['c4500'])){
           $sql = 'SELECT * FROM "Trucks" where "capacity" <= $1 and "capacity" >= $2;';
-          $result = pg_query_params($conn, $sql, array(4500, 3500));
+          $result = pg_query_params($conn, $sql, array(15000, 10000));
+        }
+        elseif(isset($_POST['c5500']))
+        {
+          $sql = 'SELECT * FROM "Trucks" where "capacity" >= $1;';
+          $result = pg_query_params($conn, $sql, array(15000));
         }
         else{
       $sql = 'SELECT * FROM "Trucks" order by "capacity";';
@@ -202,15 +207,19 @@ foreach ($_SESSION['goods'] as $good){
   <form id="form" method="post" action="trucks.php">
 
   <input type='radio' name='c2500' onchange="document.getElementById('form').submit();">
-  <label><2500 Kgs</label>
+  <label><5000 Kgs</label>
   <br>
   
   <input type='radio' name='c3500' onchange="document.getElementById('form').submit();">
-  <label>>2500 Kgs <3500 Kgs</label>
+  <label>>5000 Kgs <10000 Kgs</label>
   <br>
 
   <input type='radio' name='c4500' onchange="document.getElementById('form').submit();">
-  <label>>3500 Kgs <4500 Kgs</label>
+  <label>>10000 Kgs <15000 Kgs</label>
+  <br>
+
+  <input type='radio' name='c5500' onchange="document.getElementById('form').submit();">
+  <label>>15000 Kgs</label>
   <br>
   
   <input type='radio' name='None' onchange="document.getElementById('form').submit();">

@@ -177,7 +177,30 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   <!-- <script src="../../js/maps.js"></script> -->
   <script src="../../js/home.js"></script>
   <script src="../../js/goods.js"></script>
-
+  <!-- <script>
+function showUser(str) {
+  console.log('aaxx')
+    if (str == "") {
+        document.getElementById("main").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("main").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","goods.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+</script> -->
 
 
 </body>

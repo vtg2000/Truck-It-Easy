@@ -49,7 +49,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
                         <div class="form-group">
                             <label for="username">Full name (on the card)</label>
-                            <input type="text" name="full_name" placeholder=<?php echo $_SESSION['user1'][0];?> required class="form-control">
+                            <input type="text" name="full_name" placeholder='<?php echo $_SESSION['user1'][0];?>' required class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="cardNumber">Card number</label>

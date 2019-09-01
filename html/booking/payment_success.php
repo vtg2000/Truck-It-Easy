@@ -31,3 +31,7 @@
 </body>
 
 </html>
+<?php 
+// $msg = '000111';
+// mail("vigneshvisw@gmail.com", "OTP", $msg);
+?>
