@@ -33,6 +33,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
                 <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
                 <li class="breadcrumb-item"><a href="goods.php">Goods</a></li>
                 <li class="breadcrumb-item"><a href="trucks.php">Trucks</a></li>
+                <li class="breadcrumb-item"><a href="insurance.php">Insurance</a></li>
                 <li class="breadcrumb-item"><a href="booking_details.php">Details</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Payment</li>
             </ol>

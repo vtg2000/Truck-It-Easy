@@ -63,7 +63,14 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
                 while($row3 = pg_fetch_row($result3)){
                   echo "<p class='card-text'><small class='text-muted'>Truck : $row3[1]</small></p>";
                   }
-                  
+              if($row[10] == 't')
+              {
+                echo '<div style="color:green">Insured!</div><br>';
+              }
+              else
+              {
+                echo '<div style="color:red">Not insured</div><br>';
+              }
               echo "<p>Fare : $row[9] Rs</p>
               <div class='mystatus'></div>
               </div>

@@ -53,6 +53,10 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
     } ?>
         <?php if(isset($_SESSION['trucks']))
     {
+      echo '<li class="breadcrumb-item"><a href="../booking/insurance.php">Insurance</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['insurance']) || isset($_SESSION['trucks']))
+    {
       echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
     } ?>
         <?php if(isset($_SESSION['fare']))

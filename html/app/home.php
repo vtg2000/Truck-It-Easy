@@ -45,9 +45,13 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
     } ?>
     <?php if(isset($_SESSION['trucks']))
     {
+      echo '<li class="breadcrumb-item"><a href="../booking/insurance.php">Insurance</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['insurance']) || isset($_SESSION['trucks']))
+    {
       echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
     } ?>
-    <?php if(isset($_SESSION['fare']))
+        <?php if(isset($_SESSION['fare']))
     {
       echo '<li class="breadcrumb-item"><a href="../booking/payment.php">Payment</a></li>';
     } ?>
@@ -61,7 +65,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
       </a>
     </br>
 
-    <?php if(isset($_SESSION['fare']))
+    <?php if(isset($_SESSION['fare']) || isset($_SESSION['insurance']))
     {
       echo "
       <a href='../booking/booking_details.php'>
@@ -72,7 +76,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
     elseif(isset($_SESSION['trucks']))
     {
       echo "
-      <a href='../booking/booking_details.php'>
+      <a href='../booking/insurance.php'>
       <button class='btn btn-success' style='margin-left:435px'>Continue booking</button>
       </a>
       ";

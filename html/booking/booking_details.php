@@ -31,6 +31,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
     <li class="breadcrumb-item"><a href="../booking/location.php">Location</a></li>
     <li class="breadcrumb-item"><a href="goods.php">Goods</a></li>
     <li class="breadcrumb-item"><a href="trucks.php">Trucks</a></li>
+    <li class="breadcrumb-item"><a href="insurance.php">Insurance</a></li>
     <li class="breadcrumb-item active" aria-current="page">Details</li>
     <?php if(isset($_SESSION['fare']))
     {
@@ -42,14 +43,18 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 <h4 class='heading' style="color:white">Booking Details</h4>
  <div style='text-align:justify; margin-left: 100px' class='animate-reveal animate-first'>
  <?php
-if(isset($_POST['trucks']))
+if(isset($_POST['insurance']))
 {
   
-  $trucks = $_POST['trucks'];
-  $_SESSION['trucks'] = $trucks;
+  $insurance = $_POST['insurance'];
+  $_SESSION['insurance'] = $insurance;
+}
+else
+{
+  unset($_SESSION['insurance']);
 }
 $truck_fare = 0;
-  $goods_fare = 0;
+$goods_fare = 0;
   // $_SESSION['trucks'] = $trucks;
   echo 'Initial location <b>: ', $_SESSION['initial_loc'], '</b>';
   echo '<br/>Final location    <b>: ', $_SESSION['final_loc'], '</b>';
@@ -120,8 +125,28 @@ foreach ($_SESSION['goods'] as $good){
   echo "</div>";
   
 }
- echo '<b>Total fare : ', $truck_fare + $goods_fare, ' Rs </b></br>';
- $_SESSION['fare'] = $truck_fare + $goods_fare;
+$insurance_fare = 0;
+if(isset($_SESSION['insurance']))
+{
+  echo '<div style="color:green"><b>Insured!</div><br>';
+  $insurance_fare = $truck_fare * 0.3 + $goods_fare * 0.8 + $distance * 0.1;
+  
+}
+else
+{
+  echo '<span><div style="color:red"><b>Not insured</b></div>
+  <a href="insurance.php">Go back and buy insurance?</a></span>
+  <br>
+  <br>';
+  
+}
+ echo '<b>Total fare : ', $truck_fare + $goods_fare + $insurance_fare, ' Rs </b>
+ <label data-toggle="tooltip" title = "Truck fare : ', $truck_fare, ' Rs
+Goods fare : ', $goods_fare ,' Rs
+Insurance : ', $insurance_fare ,' Rs ">
+<i class="fa fa-question-circle"></i>
+</label></br>';
+ $_SESSION['fare'] = $truck_fare + $goods_fare + $insurance_fare;
  
   
  ?>

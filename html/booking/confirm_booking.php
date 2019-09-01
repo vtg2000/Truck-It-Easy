@@ -24,9 +24,17 @@ foreach ($_SESSION['trucks'] as $truck){
     $mytruck = $truck;
  }
 
+ if(isset($_SESSION['insurance']))
+ {
+     $bool = TRUE;
+ }
+ else
+ {
+     $bool = FALSE;
+ }
 $sql = array('user_id'=>$_SESSION['user1'][6],'initial_loc'=>$_SESSION['initial_loc'], 'final_loc'=>$_SESSION['final_loc'], 
 'dep_time'=>$_SESSION['dep_date'], 'arr_time'=>$_SESSION['arr_date'], 'eta'=>$_SESSION['time'], 'initial_loc'=>$_SESSION['initial_loc'],
-'truck_id'=>$mytruck, 'distance'=>$_SESSION['distance'], 'fare'=>$_SESSION['fare']);
+'truck_id'=>$mytruck, 'distance'=>$_SESSION['distance'], 'fare'=>$_SESSION['fare'], 'insured'=>$bool);
 
 $result = pg_insert($conn, 'Booking', $sql);
 
@@ -88,6 +96,7 @@ if($result){
                     unset($_SESSION['fare']);
                     unset($_SESSION['trucks']);
                     unset($_SESSION['time']);
+                    unset($_SESSION['insurance']);
                     header("Location: http://localhost/Smart-Goods-System/html/booking/payment_success.php"); 
                     exit();
                 }

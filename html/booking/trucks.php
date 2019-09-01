@@ -74,6 +74,10 @@ foreach ($_SESSION['goods'] as $good){
         <li class="breadcrumb-item active" aria-current="page">Trucks</li>
         <?php if(isset($_SESSION['trucks']))
     {
+      echo '<li class="breadcrumb-item"><a href="../booking/insurance.php">Insurance</a></li>';
+    } ?>
+    <?php if(isset($_SESSION['insurance']) || isset($_SESSION['trucks']))
+    {
       echo '<li class="breadcrumb-item"><a href="../booking/booking_details.php">Details</a></li>';
     } ?>
         <?php if(isset($_SESSION['fare']))
@@ -85,7 +89,7 @@ foreach ($_SESSION['goods'] as $good){
     <!-- truck selector -->
     <h4 class='heading' style="color:white">Select the Truck</h4>
     <div id='truck' class='animate-reveal animate-first'>
-      <form method='post' action='booking_details.php'>
+      <form method='post' action='insurance.php'>
 
         <?php
         if(isset($_POST['search']))
