@@ -109,8 +109,6 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
   <script src="../../js/maps.js"></script>
   <script src="../../js/home.js"></script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpKECr67jAUyEUgY95Izgo1jSHiA4LRc0&libraries=places&callback=initMap"
-    async defer></script>
+
 </body>
 </html>

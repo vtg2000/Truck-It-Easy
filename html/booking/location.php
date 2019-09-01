@@ -101,11 +101,23 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
         </div>
     </div>
+    <script src="../../config.js"></script>
+    <script>        
+    var mykey = config.KEY ;
+    
+    function loadScript() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3' +
+      '&key=' + mykey +"&libraries=places&callback=initMap"; //& needed
+  document.body.appendChild(script);
+}
+
+window.onload = loadScript;
+    </script>
+
     <script src="../../js/maps.js"></script>
     <script src="../../js/home.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpKECr67jAUyEUgY95Izgo1jSHiA4LRc0&libraries=places&callback=initMap"
-        async defer></script>
 </body>
 
 </html>
