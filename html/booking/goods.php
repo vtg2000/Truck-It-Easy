@@ -41,7 +41,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
   <!-- main -->
   
-  <div class="div main">
+  <div class="div main" id='main'>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb" style='background-color:transparent'>
         <li class="breadcrumb-item"><a href="../app/home.php">Home</a></li>
@@ -137,7 +137,7 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
   <form method="post" action="goods.php">
   
-  <input placeholder='Enter Goods name' name='search'>
+  <input placeholder='Enter Goods name' onkeyup='showUser(this.value)' name='search'>
 
   <?php if(isset($_POST['search']))
   {
@@ -156,19 +156,19 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
 
   <form id="form" method="post" action="goods.php">
 
-  <input type='checkbox' name='Electronics' onchange="document.getElementById('form').submit();">
+  <input type='checkbox' name='Electronics' onchange="filterGoods(this.attributes['name'].value)">
   <label>Electronics</label>
   <br>
   
-  <input type='checkbox' name='Furniture' onchange="document.getElementById('form').submit();">
+  <input type='checkbox' name='Furniture' onchange="filterGoods(this.attributes['name'].value)">
   <label>Furniture</label>
   <br>
 
-  <input type='checkbox' name='Other' onchange="document.getElementById('form').submit();">
+  <input type='checkbox' name='Other' onchange="filterGoods(this.attributes['name'].value)">
   <label>Other</label>
   <br>
 
-  <input type='checkbox' name='None' onchange="document.getElementById('form').submit();">
+  <input type='checkbox' name='None' onchange="filterGoods(this.attributes['name'].value)">
   <label>All</label>
   <br>
   
@@ -181,13 +181,16 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
   <!-- <script src="../../js/maps.js"></script> -->
   <script src="../../js/home.js"></script>
   <script src="../../js/goods.js"></script>
-  <!-- <script>
-function showUser(str) {
+  <script>
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+function filterGoods(str)
+{
   console.log('aaxx')
-    if (str == "") {
-        document.getElementById("main").innerHTML = "";
-        return;
-    } else { 
+    
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -200,11 +203,113 @@ function showUser(str) {
                 document.getElementById("main").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET","goods.php?q="+str,true);
+        xmlhttp.open("GET","../booking/goods_filter.php?q="+str,true);
         xmlhttp.send();
+        sleep(100).then(() => {
+          giveAttr();
+});
+
+}
+
+function showUser(str) {
+  console.log('aaxx')
+    
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("main").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","../booking/goods_search.php?q="+str,true);
+        xmlhttp.send();
+        sleep(100).then(() => {
+          giveAttr();
+});
+
+        
+}
+
+function giveAttr()       
+{
+let check = []
+let slider = []
+let output = []
+
+let something = document.getElementsByClassName('rowid')
+
+for( let j = 0; j < something.length; j++)
+{
+  let i = something[j].value
+
+  slider[i] = document.getElementById("myRange"+i);
+  output[i] = document.getElementById("demo"+i);
+  output[i].innerHTML = slider[i].value;
+  slider[i].onchange = (e) => 
+  {
+    console.log(i)
+    output[i].innerHTML = e.target.value
+    if(slider[i].value == 0)
+    {
+      check[i].checked = false;
+      slider[i].hidden = true;
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+      if(checkedOne)
+    {
+      document.getElementById('goods_submit').disabled = false;
+      document.getElementById('goods_submit').style.backgroundColor = 'green';
+    }
+    else{
+      document.getElementById('goods_submit').disabled = true;
+      document.getElementById('goods_submit').style.backgroundColor = 'grey';
+    }
+    }
+  }
+}
+
+
+for( let j = 0; j < something.length; j++)
+{
+  let i = something[j].value
+  check[i] = document.getElementById("mycheck"+i);
+  slider[i] = document.getElementById("myRange"+i);
+  output[i] = document.getElementById("demo"+i);  
+  console.log(i)  
+  check[i].onclick=()=>
+  {
+    console.log('hii')
+    slider[i].hidden ?
+    (slider[i].hidden = false, slider[i].value = 1 )
+    : (slider[i].hidden = true,  slider[i].value = 0);
+    
+    output[i].innerHTML = slider[i].value;
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+    
+    if(checkedOne)
+    {
+      document.getElementById('goods_submit').disabled = false;
+      document.getElementById('goods_submit').style.backgroundColor = 'green';
+    }
+    else{
+      document.getElementById('goods_submit').disabled = true;
+      document.getElementById('goods_submit').style.backgroundColor = 'grey';
+    }
+      
     }
 }
-</script> -->
+
+}
+    
+
+
+</script>
 
 
 </body>
