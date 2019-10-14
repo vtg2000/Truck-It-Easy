@@ -1,4 +1,4 @@
 # Truck It Easy
-This is a repository for Sem V mini-project
+This is a repository for Sem V mini-project.
 
 ![](truck.gif)
