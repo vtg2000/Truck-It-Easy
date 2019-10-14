@@ -26,7 +26,16 @@ $conn = pg_connect("dbname=$dbname host=localhost port=5432 user=$username passw
    <div class="div main">
    <h4 class='heading' style="color:white; margin-top:80px">Contact Us</h4>
         <div id='contact' style='color:white' class='animate-reveal animate-first'>
-        hello from contact
+        <br>
+        <br>
+        <div style='margin-left: 320px'>
+        <h2>How can we help?
+        </h2>
+        <br>
+
+        <p>Email us at <a href="mailto:support@truckiteasy.com">support@truckiteasy.com</a></p>
+        <p>Or call our 24/7 helpline : 9167309967</p>
+        </div>
         </div>
    </div>
 </body>
